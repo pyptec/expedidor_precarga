@@ -197,7 +197,7 @@ void Valida_Trama_Pto(unsigned char *buffer, unsigned char length_trama)
 				if (cont>4)			/* con un tiempo de retardo =((1/(22118400/12)*65535)*30)*/
 				{
 				PantallaLCD(OFF_LINE);
-				led_err_imp=0;																																																	/*error led on*/
+				//led_err_imp=0;																																																	/*error led on*/
 				Timer_wait=0;
 				lock=0;																																																					/*relevo off despues de 1 minuto*/
 				Atascado_GP0_PIN_3 = 0;	
@@ -212,7 +212,7 @@ void Valida_Trama_Pto(unsigned char *buffer, unsigned char length_trama)
 			{	
 				Timer_wait=0;																																																		/*se inicia el timer*/
 				lock=0;
-				led_err_imp=1;																																																	/*relevo off despues de 1 minuto*/
+				//led_err_imp=1;																																																	/*relevo off despues de 1 minuto*/
 				Atascado_GP0_PIN_3 = 0;	
 			}	
 			

@@ -15,7 +15,7 @@ idata unsigned char placa[]={0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0};
 
 sbit rx_ip = P0^0;	
 sbit lock = P1^7;						//Relevo 
-
+sbit led_err_imp = P0^2;			//Error 						
 /*externos bits*/
 
 extern bit placa_ready;
@@ -34,6 +34,7 @@ extern void Debug_monitor(unsigned char *buffer, unsigned char Length_trama );
 extern void Debug_txt_Tibbo(unsigned char * str);
 extern void Delay_10ms(unsigned int cntd_10ms);
 extern void tx_aux(unsigned char caracter);
+extern void Debug_Buffer_rs232_lcd(unsigned char *str,unsigned char num_char);
 
 #define True										0x01
 #define False										0x00
@@ -53,10 +54,10 @@ unsigned char recibe_cmd_Monitor(unsigned char *buffer_cmd)
 	unsigned int contador;
 	
 		NumDatos=0;
-		MaxChrRx=11;
-
-	if (USE_LPR==1)
-	{
+		MaxChrRx=12;
+		placa[0]=0x0;
+	//if (USE_LPR==1)
+	//{
 			for (j=0; j<MaxChrRx; j++)
 			{
 				contador=0;
@@ -64,7 +65,7 @@ unsigned char recibe_cmd_Monitor(unsigned char *buffer_cmd)
 				while ((rx_ip==1)&&(time_out==0))
 				{
 					contador++;
-					if (contador>65000)
+					if (contador>60000)
 					{
 						time_out=1;
 						j=MaxChrRx;
@@ -72,14 +73,18 @@ unsigned char recibe_cmd_Monitor(unsigned char *buffer_cmd)
 				}
 				if(time_out==1)break;
 					NumDatos++;
+					
 	 				*buffer_cmd=rx_Data();
+					if (*buffer_cmd != 06)
+					{
 						buffer_cmd++;
+					}
 			}
 
 			*buffer_cmd=0;
 			
 
-	}
+	//}
 	return	NumDatos;
 }	
 /*------------------------------------------------------------------------------
@@ -101,7 +106,6 @@ void Valida_Trama_Monitor(unsigned char *buffer, unsigned char length_trama)
 					
 					Delay_10ms(70);					/*habilita el relevo ON*/
 					tx_aux(06);							//ack		
-				//	Timer_wait=0;
 				
 	 			}
 			/*se recive la placa O EL CANCEL Y NO_PLATE*/	
@@ -118,7 +122,7 @@ void Valida_Trama_Monitor(unsigned char *buffer, unsigned char length_trama)
 				placa[j-1]=0;
 			  placa_ready=1;
 			ValTimeOutCom=10;
-			
+			led_err_imp = 0;
 			
 		}
 		
@@ -132,12 +136,15 @@ void clear_placa()
 	 placa[i]=0x0;
 	}
 	 placa_ready=0;
+	led_err_imp = 1;
 }
 void Rx_Monitor()
 {
 	unsigned char Length_trama;
-	unsigned char buffer1[12];
+	unsigned char buffer1[13];
+		buffer1[0]=0;
 		Length_trama=recibe_cmd_Monitor(buffer1);
+		Debug_Buffer_rs232_lcd(buffer1,Length_trama);
 		Debug_monitor(buffer1,Length_trama);
   	Valida_Trama_Monitor(buffer1,Length_trama);
 }

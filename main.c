@@ -128,7 +128,8 @@ void variable_inicio()
 	Debug_Tibbo=rd_eeprom(0xa8,EE_DEBUG);
 	USE_LPR=rd_eeprom(0xa8,EE_USE_LPR);
 	Raspberry = rd_eeprom(0xa8,EE_TIPO_PANTALLA);
-	//Debug_Tibbo = 1;
+	precarga= rd_eeprom(0xa8,EE_PRECARGA);
+//	Debug_Tibbo = 1;
 	
 }
 /*------------------------------------------------------------------------------
@@ -158,7 +159,7 @@ Delay_20us(33);
 time_mbit();
 
 tx_aux('a');	
-
+led_err_imp =1;
 sel_Funcion();																															/*el pulsador funcion es el cmd q da la entrada a programacion */
 	
 	if (DataIn==0)							
@@ -173,13 +174,14 @@ while(Secuencia_inicio_expedidor());																				/* procedimiento de inic
 																							
 	while (1) 																																/* Loop Principal								*/	
 	{   
-	
- 				
+			
 				if (rx_ip==0)																													/*pregunto si llega datos de monitor pto serie emulado*/
 				{
+					//Debug_Tibbo = 1;
 					 Rx_Monitor();
+				//	Debug_Tibbo = 0;
 				}
-				
+		
 			
 					
 				Estado_Comunicacion_Secuencia_MF=SecuenciaExpedidorMF(Estado_Comunicacion_Secuencia_MF);					//SecuenciaExpedidor();
@@ -194,7 +196,7 @@ while(Secuencia_inicio_expedidor());																				/* procedimiento de inic
 				
 						/*solo de prueba*/		
 				Debug_pto_paralelo(buffer,Length_trama);				
-					Valida_Trama_Pto(buffer,Length_trama);																/*valido la informacion recibida */
+				Valida_Trama_Pto(buffer,Length_trama);																/*valido la informacion recibida */
 				
 						
 				

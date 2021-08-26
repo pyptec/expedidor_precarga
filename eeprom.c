@@ -31,6 +31,7 @@ unsigned char l_chr;
 
 #define EE_TICKET_ID					0X0200
 #define EE_FECHA_VENCIMIENTO		0X0350
+#define EE_BAUDIO								0X0800
 
 
 //*******************************************************************************************
@@ -411,4 +412,5 @@ unsigned int i;
 	{
 			wr_eeprom(0xa8,i,dato);
 	}
+			wr_eeprom(0xa8 ,EE_BAUDIO,00);							
 }

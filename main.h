@@ -86,7 +86,7 @@ definiciones de los estados del verificador o expedidor
  unsigned char  USE_LPR;
  unsigned char 	Raspberry;																		/*variable que define los msj por lcd (0) o rasberry (1)*/
  unsigned int Timer_tivo=0;
-
+ unsigned char precarga;
 /* definicion de variables globales de configuracion del parqueadero*/
 
 
@@ -95,6 +95,9 @@ definiciones de los estados del verificador o expedidor
 const unsigned  char ACK= 06	;
 const unsigned  char ETX= 03	;
 const unsigned  char STX_LINTECH= 0xf2	;
+const unsigned  char STX=02;
+
+#define		RESPUESTA					0X01
 
 /*definicion de bit*/
 bit buffer_ready = 0;
@@ -109,6 +112,7 @@ bit pto_paraleo=0;
 #define EE_USE_LPR						0x000A
 #define EE_CPRCN_ACTIVA				0x000C
 #define EE_TIPO_PANTALLA			0X000E
+#define EE_PRECARGA							0X0017
 
 /*librerias*/
 #include "delay.h"

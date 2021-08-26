@@ -5,12 +5,13 @@
 extern void Delay_20us(unsigned int cnt);
 extern void          _nop_     (void);
 extern unsigned char hex_bcd (unsigned char byte);
-
+extern char putchar (char c);
 /*variable externas*/
 extern unsigned char Debug_Tibbo;
 
 sbit rx_ip = P0^0;					//		
-sbit txd2 = P1^0;					//Transmision Aux Datos	IP								*
+sbit txd2 = P1^0;					//Transmision Aux Datos	IP				
+sbit sel_com = P0^7;	//*
 
 #define True										0x01
 #define False										0x00
@@ -20,38 +21,53 @@ sbit txd2 = P1^0;					//Transmision Aux Datos	IP								*
 void time_bit()
 {
 	unsigned char j;
-
-	for (j=0; j<=7; j++) 				//18 para 19200  ...   41 Para 9600	 //42 142us //7 a 9600 transmision
+	for (j=0; j<=15; j++) 				//18 para 19200  ...   41 Para 9600
 	{
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-	//	_nop_();
-//		_nop_();
-	//	_nop_();
-	//	_nop_();
 	}
+
+//	for (j=0; j<=7; j++) 				//18 para 19200  ...   41 Para 9600	 //42 142us //7 a 9600 transmision
+//	{
+//		_nop_();
+//		_nop_();
+//		_nop_();
+//		_nop_();
+//		_nop_();
+//		_nop_();
+//		_nop_();
+//		_nop_();
+//		_nop_();
+		
+//	}
+//		_nop_();
+//  	_nop_();
+//	  _nop_();
+//		_nop_();
+//	  _nop_();		//91
+//		_nop_();
+//		_nop_(); //92
+//	 _nop_();
+//	 _nop_();			//93
+//	 _nop_();			
+//	 _nop_();			//94
 }
 /*------------------------------------------------------------------------------
 ------------------------------------------------------------------------------*/
 void time_mbit(void)
 {
 	unsigned char j;
-	for (j=0; j<=4; j++)
+	//unsigned char j;
+
+	for (j=0; j<=5; j++) 				//18 para 19200  ...   41 Para 9600
 	{
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
-		_nop_();
+//	for (j=0; j<=4; j++)
+	//{
+	//	_nop_();
+	//	_nop_();
+	//	_nop_();
+	//	_nop_();
+	//	_nop_();
+	//	_nop_();
+	//	_nop_();
 	}
 
 }
@@ -150,7 +166,17 @@ void Debug_chr_Tibbo(unsigned char Dat)
 	
 	}
 }
-
+void Debug_chr_rs232_lcd(unsigned char Dat)
+{
+	unsigned char temp,d;
+	temp=(Dat&0xf0)>>4;
+		(temp>0x09)?(temp=temp+0x37):(temp=temp+0x30);
+				d=putchar(temp);
+	temp=(Dat&0x0f);
+		(temp>0x09)?(temp=temp+0x37):(temp=temp+0x30);
+	d=putchar(temp);
+	d=putchar(' ');
+}
 /*------------------------------------------------------------------------------
 Transmito un Buffer x y lo pasa a ascii 
 io=0 datos enviados
@@ -183,7 +209,20 @@ void DebugBufferMF(unsigned char *str,unsigned char num_char,char io)
   }
 
 }
-
+void Debug_Buffer_rs232_lcd(unsigned char *str,unsigned char num_char)
+{
+	unsigned char j,d;
+	sel_com=0;
+	for (j=0; j<num_char; j++)
+		{
+		Debug_chr_rs232_lcd(*str);
+		str++;
+		}
+		d=putchar('\n');
+		
+  
+	sel_com=1;
+}
 /*------------------------------------------------------------------------------
 imprime la trama hasta el caracter null
 ------------------------------------------------------------------------------*/
@@ -201,7 +240,19 @@ void Debug_txt_Tibbo(unsigned char * str)
 		
 	}
 }
-
+void Debug_txt_rs232(unsigned char * str)
+{
+	unsigned char i,d;
+	i=0;
+	
+	
+		for (i=0; str[i] != '\0'; i++)
+		{
+ 	  		d=putchar(str[i]);
+		}
+		
+	
+}
 void Debug_Dividir_texto()
 {
 	Debug_txt_Tibbo((unsigned char *) "/*---------------------------------------*/\n\r");

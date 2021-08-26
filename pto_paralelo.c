@@ -146,7 +146,7 @@ void  send_port(unsigned char *buffer_port, unsigned char length_char)
 		if (cont==0)
 		{
 			timeOut=1;
-			led_err_imp=0;															// LED ERROR
+			//led_err_imp=0;															// LED ERROR
 		}
 	}
 	if ((timeOut==0)&&(busy==0))

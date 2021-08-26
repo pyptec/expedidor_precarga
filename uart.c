@@ -17,13 +17,18 @@ extern	unsigned char g_cContByteRx;
 extern unsigned char cont_trama;
 /*constantes globales*/
 extern const unsigned  char ACK;
-extern const unsigned  char ETX;
+
 extern const unsigned  char STX_LINTECH;
+extern const unsigned  char ETX;
+extern const unsigned  char STX;
 unsigned char cnt__ask_off=0;
 
 /*externos bits*/
 extern bit buffer_ready;
 bit aSk=0; 									/*indica que llego el 06 = ask de que recivio el msj*/
+
+/*funciones*/
+extern unsigned char rd_eeprom (unsigned char control,unsigned int Dir); 
 /*------------------------------------------------------------------------------
 Notes:
 
@@ -42,6 +47,7 @@ If next_in = next_out, the buffer is empty.
 #define  ESPERA_INICIO_RTA  1		// se almacena el stx
 #define  LEN_DATA						2
 #define  STORE_DATA					3
+#define  STORE_PLACA				4
 
 
 
@@ -56,7 +62,7 @@ If next_in = next_out, the buffer is empty.
 //#define RBUF_SPACE  idata       /*** Memory space where the receive buffer resides ***/
 
 #define CTRL_SPACE  data        /*** Memory space for the buffer indexes ***/
-
+#define EE_BAUDIO								0X0800
 /*------------------------------------------------------------------------------
 ------------------------------------------------------------------------------*/
 /*
@@ -130,6 +136,11 @@ if (RI != 0)
 			g_cEstadoComSoft=ESPERA_INICIO_RTA;
 			
 			}
+			//if(cDatoRx==STX)  							// espera el ask
+			//{
+			//	g_cContByteRx=0;r_in=0;r_out=0;	
+			//	g_cEstadoComSoft=STORE_PLACA;
+			//}
 		break;
 /*------------------------------------------------------------------------------------------------
 			se almacena la trama 
@@ -207,7 +218,16 @@ if (RI != 0)
 				}
  			 
 		break;		
-
+	case STORE_PLACA:
+		Buffer_Rta_Lintech[g_cContByteRx++]=cDatoRx;	
+		if(Buffer_Rta_Lintech[g_cContByteRx-1]==ETX || (g_cContByteRx==8) )
+		{
+			aSk=0;
+			buffer_ready=1;
+			g_cEstadoComSoft=ESPERA_RX;
+		}
+		
+		break;
 /*------------------------------------------------------------------------------------------------
 		
 /*-------------------------------------------------------------------------------------------------*/				
@@ -291,6 +311,9 @@ PS = 1;             /* set serial interrupts to low priority */
 void com_baudrate ()
   
 {
+unsigned char dataee;	
+	dataee=rd_eeprom(0xa8,EE_BAUDIO);		
+	
 /*------------------------------------------------
 Clear transmit interrupt and buffer.
 ------------------------------------------------*/
@@ -309,9 +332,18 @@ PCON |= 0x80;       /* 0x80=SMOD: set serial baudrate doubler */
 TMOD &= ~0xF0;      /* clear timer 1 mode bits */
 TMOD |= 0x20;       /* put timer 1 into MODE 2 */
 
-TH1 =0xf4;// (unsigned char) (256 - (XTAL / (16L * 12L * baudrate)));
-TL1=0xf4;
-TR1 = 1;            /* start timer 1 */
+	if (dataee!= 0)
+	{
+	TH1 =0xf4;// (unsigned char) (256 - (XTAL / (16L * 12L * baudrate)));
+	TL1=0xf4;
+	TR1 = 1;            /* start timer 1 */
+	}
+	else
+	{
+	TH1 =0xff;// (unsigned char) (256 - (XTAL / (16L * 12L * baudrate)));
+	TL1=0xff;
+	TR1 = 1; 
+	}
 }
 
 /*------------------------------------------------------------------------------

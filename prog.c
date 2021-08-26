@@ -47,6 +47,7 @@ unsigned char validacion [11]={"admin"};	//usuario
 #define EE_VALIDA_TIPO_VEHICULO_MENSUAL 0X0014
 #define	EE_HABILITA_APB_MENSUAL 0X0015
 #define EE_MENSUAL_BOCA_ON_OFF	0X0016
+#define EE_PRECARGA							0X0017
 #define EE_HORARIO_1						0X0019
 #define EE_HORARIO_2						0x0032
 #define EE_HORARIO_3						0x004b
@@ -60,9 +61,11 @@ unsigned char validacion [11]={"admin"};	//usuario
 #define EE_TICKET_ID						0X0200
 #define EE_ID_REGISTER					0x0300
 #define EE_FECHA_VENCIMIENTO		0X0350
+
+#define EE_BAUDIO								0X0800
 /* Definicion del tamaño de comando y longitud de cmd*/
 
-#define 	NUMCOMMAND 19
+#define 	NUMCOMMAND 20
 #define 	LONGSIZE 3
 
 #define True										0x01
@@ -112,7 +115,8 @@ char comandos[NUMCOMMAND][LONGSIZE]=
 	"15",     // ver comandos programados
 	"16",			//AYUDA Ayuda!muestra todos los comandos
 	"17",			//SALIRSalir de programacion
-	"18"			//cmd escondido fecha de vencimiento password
+	"18",			//cmd escondido fecha de vencimiento password
+	"19"			//cmd escondido precarga
 };
 
 /*------------------------------------------------------------------------------
@@ -1209,6 +1213,39 @@ void Prog_mensuales()
 	}
 	
 }
+void Prog_precarga()
+{
+	unsigned char buffer[10];
+	unsigned int dataee;
+
+	
+	dataee=rd_eeprom(0xa8,EE_PRECARGA);																					/*se lee el id_cliente actual */
+	sprintf(buffer,"%d",dataee);																									/*se convierte  un entero a un string*/
+	if(dataee==0)
+	{
+		printf("\r\n\n ACTUAL PRECARGA INHABILITADO=%s\r\n\n",buffer);														/*se muestra el id_cliente actual en pantalla*/
+	}
+	else
+	{
+		printf("\r\n\n ACTUAL PRECARGA HABILITADO=%s\r\n\n",buffer);			
+	}
+	
+	printf("\r\n\n DIGITE EL NUEVO ESTADO DE PRECARGA=");																	/*digite el nuevo id_cliente*/
+	IngresaDato(buffer,0);																												/*trae el dato digitado*/
+	dataee=atoi(buffer);																													/*lo convierto a un dato hex*/
+	wr_eeprom(0xa8,EE_PRECARGA,dataee);																					/*grabo el dato en la eeprom*/
+	
+	dataee=rd_eeprom(0xa8,EE_PRECARGA);																				/*leo el dato grabado*/
+	sprintf(buffer,"%d",dataee);	
+	if(dataee==0)
+	{
+		printf("\r\n\n ACTUAL PRECARGA INHABILITADO=%s\r\n\n",buffer);														/*se muestra el id_cliente actual en pantalla*/
+	}
+	else
+	{
+		printf("\r\n\n ACTUAL PRECARGA HABILITADO=%s\r\n\n",buffer);			
+	}
+}
 void Ver_Prog()
 {
 	unsigned char buffer[10];
@@ -1531,7 +1568,9 @@ unsigned char buffer[20];
 						case 18:
 							Prog_fecha_vencimiento();
 							break;
-		
+						case 19:
+							Prog_precarga();
+							break;
 					
             default:
                printf("\r\nComando no existe '%s'", cmd);

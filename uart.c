@@ -136,11 +136,7 @@ if (RI != 0)
 			g_cEstadoComSoft=ESPERA_INICIO_RTA;
 			
 			}
-			//if(cDatoRx==STX)  							// espera el ask
-			//{
-			//	g_cContByteRx=0;r_in=0;r_out=0;	
-			//	g_cEstadoComSoft=STORE_PLACA;
-			//}
+		
 		break;
 /*------------------------------------------------------------------------------------------------
 			se almacena la trama 
@@ -340,8 +336,8 @@ TMOD |= 0x20;       /* put timer 1 into MODE 2 */
 	}
 	else
 	{
-	TH1 =0xff;// (unsigned char) (256 - (XTAL / (16L * 12L * baudrate)));
-	TL1=0xff;
+	TH1 =1;// (unsigned char) (256 - (XTAL / (16L * 12L * baudrate)));
+	TL1=1;
 	TR1 = 1; 
 	}
 }

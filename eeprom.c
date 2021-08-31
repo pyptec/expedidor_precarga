@@ -13,6 +13,7 @@ extern void Debug_txt_Tibbo(unsigned char * str);
 extern int sprintf  (char *, const char *, ...);
 extern void Debug_chr_Tibbo(unsigned char Dat);
 void Formato_eeprom();
+extern void Dwload_EEprom_prog(unsigned char *password);
 
 //******************************************************************************************
 // 		RUTINAS DE EEPROM 24FC1025
@@ -408,9 +409,12 @@ void Formato_eeprom()
 {
 unsigned char dato=0xff;
 unsigned int i;
+unsigned char password[7]	;
 	for(i=0; i< EE_FECHA_VENCIMIENTO; i++)
 	{
 			wr_eeprom(0xa8,i,dato);
 	}
-			wr_eeprom(0xa8 ,EE_BAUDIO,00);							
+			wr_eeprom(0xa8 ,EE_BAUDIO,00);	
+		strcpy(password, "nataly");
+		Dwload_EEprom_prog(password);	
 }

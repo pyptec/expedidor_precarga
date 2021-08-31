@@ -2569,11 +2569,6 @@ unsigned char SecuenciaExpedidorMF( unsigned char EstadoActivo)
 			EstadoActivo=Load_Secuencia_Expedidor(Secuencia_Expedidor,EstadoActivo,SEQ_CMD_ACEPTADO,SEQ_RESPUESTA_TRANSPORTE);
 			Secuencia_Expedidor[TareadelCmd ] = TAREA_TIPO_TARJETA;
 			break;
-		//case SEQ_CARD_INSERCION_ON:
-		//	Card_Insercion(Habilita);	
-		//	EstadoActivo=Load_Secuencia_Expedidor(Secuencia_Expedidor,EstadoActivo,SEQ_CMD_ACEPTADO,SEQ_RESPUESTA_TRANSPORTE);
-		//	Secuencia_Expedidor[TareadelCmd ] = TAREA_TIPO_MENSUAL;
-		//	break;
 		
 		case SEQ_LOAD_PASSWORD:
 			LoadVerify_EEprom();
@@ -2616,13 +2611,7 @@ unsigned char SecuenciaExpedidorMF( unsigned char EstadoActivo)
 			Secuencia_Expedidor[TareadelCmd ] = TAREA_OPEN_BARRERA;
 			}
 			break;
-	//	case SEQ_DETAIL_CARD_TRAMPA:
-		//	if ((buffer_ready == True)|| (ValTimeOutCom > TIME_WAIT))
-		//	{
-		//	Check_Status(SENSOR_DETAIL);		
-		//	EstadoActivo=Analiza_card_mount_rf();		
-		//	}
-		//	break;
+
 		case SEQ_LOAD_EEPROM:
 			Dwload_EEprom();
 			EstadoActivo = Load_Secuencia_Expedidor(Secuencia_Expedidor,EstadoActivo,SEQ_CMD_ACEPTADO,SEQ_READ_SECTOR_BLOQUE);	
@@ -2692,9 +2681,7 @@ unsigned char SecuenciaExpedidorMF( unsigned char EstadoActivo)
 			{
 				if (rx_ip==0)																													/*pregunto si llega datos de monitor pto serie emulado*/
 				{
-				//	Debug_Tibbo = 1;
 					 Rx_Monitor();
-				//	Debug_Tibbo = 0;
 				}
 			 EstadoActivo=Ingreso_Vehiculo();
 			}
@@ -2702,9 +2689,7 @@ unsigned char SecuenciaExpedidorMF( unsigned char EstadoActivo)
 			{
 				if (rx_ip==0)																													/*pregunto si llega datos de monitor pto serie emulado*/
 				{
-				//	Debug_Tibbo = 1;
 					 Rx_Monitor();
-				//	Debug_Tibbo = 0;
 				}
 			}
 			break;
@@ -2766,11 +2751,7 @@ unsigned char SecuenciaExpedidorMF( unsigned char EstadoActivo)
 					{		
 						EstadoActivo = Respuesta_Segunda_clave(Atributos_Expedidor,Buffer_Write_MF);
 					}
-			//else if (Secuencia_Expedidor [TareadelCmd] == TAREA_TIPO_MENSUAL)	
-				//	{
-					//	EstadoActivo = Analiza_Presencia_Mensual();
-				//	}
-					
+							
 			else if (Secuencia_Expedidor [TareadelCmd] == TAREA_UID	)	
 					{
 						EstadoActivo = Analiza_Uid_Card(Atributos_Expedidor);

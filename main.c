@@ -128,7 +128,7 @@ void variable_inicio()
 	Debug_Tibbo=rd_eeprom(0xa8,EE_DEBUG);
 	USE_LPR=rd_eeprom(0xa8,EE_USE_LPR);
 	Raspberry = rd_eeprom(0xa8,EE_TIPO_PANTALLA);
-	precarga= rd_eeprom(0xa8,EE_PRECARGA);
+
 //	Debug_Tibbo = 1;
 	
 }
@@ -177,9 +177,7 @@ while(Secuencia_inicio_expedidor());																				/* procedimiento de inic
 			
 				if (rx_ip==0)																													/*pregunto si llega datos de monitor pto serie emulado*/
 				{
-					//Debug_Tibbo = 1;
 					 Rx_Monitor();
-				//	Debug_Tibbo = 0;
 				}
 		
 			

@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   MAIN                                                              08/26/2021 15:40:14 PAGE 1   
+C51 COMPILER V9.59.0.0   MAIN                                                              08/31/2021 14:47:15 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE MAIN
@@ -62,7 +62,7 @@ line level    source
   52          {
   53   1        ET0=0;                  // enable interrupcion bit 1 del registro IENO
   54   1        
-C51 COMPILER V9.59.0.0   MAIN                                                              08/26/2021 15:40:14 PAGE 2   
+C51 COMPILER V9.59.0.0   MAIN                                                              08/31/2021 14:47:15 PAGE 2   
 
   55   1      }
   56          /*------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ line level    source
  114   1      sel_com=1;                    /*seleccionar el pto serie */
  115   1      lock=0;                       /*barrera off*/ 
  116   1        
-C51 COMPILER V9.59.0.0   MAIN                                                              08/26/2021 15:40:14 PAGE 3   
+C51 COMPILER V9.59.0.0   MAIN                                                              08/31/2021 14:47:15 PAGE 3   
 
  117   1      }
  118          
@@ -142,7 +142,7 @@ line level    source
  128   1        Debug_Tibbo=rd_eeprom(0xa8,EE_DEBUG);
  129   1        USE_LPR=rd_eeprom(0xa8,EE_USE_LPR);
  130   1        Raspberry = rd_eeprom(0xa8,EE_TIPO_PANTALLA);
- 131   1        precarga= rd_eeprom(0xa8,EE_PRECARGA);
+ 131   1      
  132   1      //  Debug_Tibbo = 1;
  133   1        
  134   1      }
@@ -190,53 +190,51 @@ line level    source
  174   1                                                    
  175   1        while (1)                                                                 /* Loop Principal               */  
  176   1        {   
-C51 COMPILER V9.59.0.0   MAIN                                                              08/26/2021 15:40:14 PAGE 4   
+C51 COMPILER V9.59.0.0   MAIN                                                              08/31/2021 14:47:15 PAGE 4   
 
  177   2            
  178   2              if (rx_ip==0)                                                         /*pregunto si llega datos de monitor pto serie emulado*/
  179   2              {
- 180   3                //Debug_Tibbo = 1;
- 181   3                 Rx_Monitor();
- 182   3              //  Debug_Tibbo = 0;
- 183   3              }
- 184   2          
- 185   2            
- 186   2                
- 187   2              Estado_Comunicacion_Secuencia_MF=SecuenciaExpedidorMF(Estado_Comunicacion_Secuencia_MF);          //Secuenc
+ 180   3                 Rx_Monitor();
+ 181   3              }
+ 182   2          
+ 183   2            
+ 184   2                
+ 185   2              Estado_Comunicacion_Secuencia_MF=SecuenciaExpedidorMF(Estado_Comunicacion_Secuencia_MF);          //Secuenc
              -iaExpedidor();
- 188   2              
- 189   2                  
- 190   2                                                          
- 191   2            
- 192   2              if ((busy == 0) && (pto_paraleo == 0))                              /*comunicacion con el pto paralelo*/
- 193   2              {
- 194   3            
- 195   3              Length_trama=recibe_port(buffer);                                   /*recibe informacion del pto paralelo*/
- 196   3              
- 197   3                  /*solo de prueba*/    
- 198   3              Debug_pto_paralelo(buffer,Length_trama);        
- 199   3              Valida_Trama_Pto(buffer,Length_trama);                                /*valido la informacion recibida */
+ 186   2              
+ 187   2                  
+ 188   2                                                          
+ 189   2            
+ 190   2              if ((busy == 0) && (pto_paraleo == 0))                              /*comunicacion con el pto paralelo*/
+ 191   2              {
+ 192   3            
+ 193   3              Length_trama=recibe_port(buffer);                                   /*recibe informacion del pto paralelo*/
+ 194   3              
+ 195   3                  /*solo de prueba*/    
+ 196   3              Debug_pto_paralelo(buffer,Length_trama);        
+ 197   3              Valida_Trama_Pto(buffer,Length_trama);                                /*valido la informacion recibida */
+ 198   3              
+ 199   3                  
  200   3              
- 201   3                  
- 202   3              
- 203   3               
- 204   3              }
- 205   2          msj_lcd_informativo();                                                  /*muestra la informacion de  ID cliente, cod parque, fech
+ 201   3               
+ 202   3              }
+ 203   2          msj_lcd_informativo();                                                  /*muestra la informacion de  ID cliente, cod parque, fech
              -a,comparacion*/
- 206   2        
- 207   2      
- 208   2          }
- 209   1      }
+ 204   2        
+ 205   2      
+ 206   2          }
+ 207   1      }
+ 208          
+ 209          
  210          
- 211          
- 212          
- 213          /*------------------------------------------------------------------------------
- 214          ------------------------------------------------------------------------------*/
- 215          
+ 211          /*------------------------------------------------------------------------------
+ 212          ------------------------------------------------------------------------------*/
+ 213          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    450    ----
+   CODE SIZE        =    436    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =    110      10
    PDATA SIZE       =   ----    ----

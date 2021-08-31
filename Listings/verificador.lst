@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 1   
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE VERIFICADOR
@@ -62,7 +62,7 @@ line level    source
   52          
   53          /*funciones prototipo del transporte MODULO io_sensores*/
   54          
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 2   
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 2   
 
   55          extern unsigned char  ValidaSensoresPaso(void);
   56          unsigned char Valida_Sensor1_Auto();
@@ -126,7 +126,7 @@ line level    source
  114          /*variables externas*/
  115          
  116          extern unsigned char g_cEstadoComSoft;
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 3   
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 3   
 
  117          extern unsigned char ValTimeOutCom;
  118          extern unsigned char g_cContByteRx;
@@ -190,7 +190,7 @@ line level    source
  175          /*----------------------------------------------------------------------------
  176          Definiciones de sequencias de tareas del verificador y expedidor
  177          ------------------------------------------------------------------------------*/
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 4   
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 4   
 
  178          #define TAREA_SENSORES_TRANSPORTE             0X00
  179          #define TAREA_PRESENCIA_VEHICULAR             0X01  
@@ -254,7 +254,7 @@ line level    source
  237          /*------------------------------------------------------------------------------
  238           definiciones de lintech en el comando Card_Insercion
  239          ------------------------------------------------------------------------------*/
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 5   
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 5   
 
  240          
  241          #define Habilita        0x30
@@ -318,7 +318,7 @@ line level    source
  299          /*----------------------------------------------------------------------------
  300          Comprobacion automatica del tipo de tarjeta 
  301          checking RF card type
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 6   
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 6   
 
  302          Card_type_H   Card_type_L  explicacion
  303              0             0           tarjeta desconocida
@@ -382,7 +382,7 @@ line level    source
  361          #define PRMR_MENSUAL_FUERA_HORARIO    0Xb5
  362          #define MENSUAL_FUERA_HORARIO   181
  363          #define ERROR_MF1               0XE2
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 7   
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 7   
 
  364          #define HORARIO_NO_PROG         182
  365          
@@ -446,7 +446,7 @@ line level    source
  423          /*----------------------------------------------------------------------------
  424          posicion de  MF bloque 2 sector 1
  425          (00) donde esta grabado la fecha de entrada (año,mes,dia,hora,minutos) estan en hex  
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 8   
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 8   
 
  426          (0b) donde esta grabado la fecha de salida (año,mes,dia,hora,minutos) estan en hex 
  427          ------------------------------------------------------------------------------*/
@@ -510,7 +510,7 @@ line level    source
  481           Uid_3,
  482           Expira_ano,
  483           Expira_mes,
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 9   
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 9   
 
  484           Expira_dia,
  485           DateTime_year,
@@ -574,7 +574,7 @@ line level    source
  543          Definicion de varaibles globales del objeto
  544          ------------------------------------------------------------------------------*/
  545          
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 10  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 10  
 
  546          static unsigned char Estado=INICIA_LINTECH;
  547          bit MenSual = False;                      /*bit que informa si esta activo mensual*/
@@ -638,7 +638,7 @@ line level    source
              -/
  605   4                  Trama_Validacion_P_N=ERROR_TRP_TRAMA  ;   
  606   4                  
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 11  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 11  
 
  607   4                }
  608   3              }
@@ -702,7 +702,7 @@ line level    source
  664   3                Delay_10ms(110);
  665   3                cnt__ask_off=0;                                                                   /*limpio ls errores*/
  666   3                cnt_espera_ask_on=0;
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 12  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 12  
 
  667   3                error_rx_pto=ESPERA_MAS_TIEMPO;                                                   /**/
  668   3                Atascado_GP0_PIN_3 = OFF; 
@@ -766,7 +766,7 @@ line level    source
  724   2            {
  725   3            EstadoComSeqMF= *(secuencia_Expedidor + EstadoActual);                              /*SEQ_RTA_CARD_POSno ha respon
              -dido*/
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 13  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 13  
 
  726   3            } 
  727   2            else if (temp==ERROR_TRP_TRAMA)
@@ -830,7 +830,7 @@ line level    source
  784            else
  785              { 
  786                
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 14  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 14  
 
  787                  send_portERR(PRMR_ERROR_LOOP);
  788                  PantallaLCD(ERROR_LOOP);
@@ -894,7 +894,7 @@ line level    source
  844          {
  845   1        unsigned char Estado_expedidor;
  846   1        unsigned char temp;
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 15  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 15  
 
  847   1        unsigned char buffer_UID[17];
  848   1          if (Buffer_Rta_Lintech[Pos_Length] >= 0x0f)
@@ -958,7 +958,7 @@ line level    source
  903   3                Debug_txt_Tibbo((unsigned char *) "Tarjeta: Automatico\r\n");           //expide tarjetas automatico con p
              -resencia
  904   3                send_portERR(AUDIO_ENTRADA);                                                                      // muevo la tarjeta hasta el lector de
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 16  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 16  
 
              - rf
  905   3                Estado=SEQ_WAIT_PLACA;            //SEQ_LPR;                                                          //SEQ_MOVER_CARD_RF;                          
@@ -1022,7 +1022,7 @@ line level    source
  960          /*------------------------------------------------------------------------------
  961          Se pregunta por el estado del expedidor si hay tarjetas y presencia para expulsar tarjeta
  962          o si hay tarjeta en la boca o rf para entrar en mensuales
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 17  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 17  
 
  963          ------------------------------------------------------------------------------*/
  964          
@@ -1086,7 +1086,7 @@ line level    source
 1015   2              }
 1016   1            //else
 1017   1            //  {
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 18  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 18  
 
 1018   1            //    Estado_expedidor=SEQ_INICIO;  
 1019   1            //  }
@@ -1150,7 +1150,7 @@ line level    source
 1070   3                else  
 1071   3                {
 1072   4                  /*NO HAY TARJETA EN RF*/
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 19  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 19  
 
 1073   4                  MenSual = False;
 1074   4                  Estado_expedidor = SEQ_INICIO;    
@@ -1214,7 +1214,7 @@ line level    source
 1129   2                for (temp=0; temp<16; ++temp)
 1130   2                {
 1131   3                  buffer_S1_B1 [temp]=Buffer_Rta_Lintech[Pos_IniDatMF+temp];                            /*almaceno la informacion de
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 20  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 20  
 
              - MF en un arreglo*/
 1132   3                 
@@ -1278,7 +1278,7 @@ line level    source
 1187   1            {
 1188   2                
 1189   2              if ((Buffer_Rta_Lintech[Rtype]) == OPERATE_FAIL)
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 21  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 21  
 
 1190   2              {
 1191   3                falla++;
@@ -1342,7 +1342,7 @@ line level    source
 1247   2                Debug_chr_Tibbo(*(Atributos_Expedidor + Pico_Placa));
 1248   2                Debug_txt_Tibbo((unsigned char *) "\r\n");
 1249   2                
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 22  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 22  
 
 1250   2            
 1251   2                Debug_txt_Tibbo((unsigned char *) "ANTIPASSBACK:");
@@ -1406,7 +1406,7 @@ line level    source
 1306   1        unsigned char temp;
 1307   1        unsigned char Estado_expedidor;
 1308   1        unsigned char *reelectura;
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 23  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 23  
 
 1309   1        static unsigned char error_lectura=0;
 1310   1            
@@ -1470,7 +1470,7 @@ line level    source
 1367   1      }
 1368          unsigned char Responde_Write_Tarjeta_Sector1_Bloque2(unsigned char *Atributos_Expedidor,unsigned char *Buf
              -fer_Write_MF)
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 24  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 24  
 
 1369          {
 1370   1        unsigned char Estado_expedidor;
@@ -1534,7 +1534,7 @@ line level    source
 1428   2               Debug_txt_Tibbo(Armar_Trama_Monitor(Atributos_Expedidor));
 1429   2                if (rd_eeprom(0xa8,EE_DEBUG) == False)
 1430   2                 {
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 25  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 25  
 
 1431   3                   Debug_Tibbo=False;
 1432   3                                           
@@ -1598,7 +1598,7 @@ line level    source
 1489   2          Debug_txt_rs232(placa);
 1490   2          Estado_expedidor = SEQ_SECOND_PASSWORD;
 1491   2        }
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 26  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 26  
 
 1492   1        else if (strcmp(placa,"unknown")== 0)
 1493   1        {
@@ -1662,7 +1662,7 @@ line level    source
 1550   1        *(Buffer_Write_MF + 2)= bcd_hex(*(Atributos_Expedidor +  DateTime_day));
 1551   1        *(Buffer_Write_MF + 3)= bcd_hex(*(Atributos_Expedidor +  DateTime_hour));
 1552   1        *(Buffer_Write_MF + 4)= bcd_hex(*(Atributos_Expedidor +  DateTime_minutes));
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 27  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 27  
 
 1553   1        /*descuentos los borro*/
 1554   1        
@@ -1726,7 +1726,7 @@ line level    source
 1610   1        /*leo fecha de entrada*/
 1611   1        buffer[j++]= bcd_hex(*(Atributos_Expedidor +  DateTime_year))   + 0x30;
 1612   1        buffer[j++]= bcd_hex(*(Atributos_Expedidor +  DateTime_month))  + 0x30;
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 28  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 28  
 
 1613   1        buffer[j++]= bcd_hex(*(Atributos_Expedidor +  DateTime_day))    + 0x30;
 1614   1        buffer[j++]= bcd_hex(*(Atributos_Expedidor +  DateTime_hour))   + 0x30;
@@ -1790,7 +1790,7 @@ line level    source
 1671   1        buffer[6]= bcd_hex(*(Atributos_Expedidor +  DateTime_year))   + 0x30;
 1672   1        buffer[7]= bcd_hex(*(Atributos_Expedidor +  DateTime_month))  + 0x30;
 1673   1        buffer[8]= bcd_hex(*(Atributos_Expedidor +  DateTime_day))    + 0x30;
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 29  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 29  
 
 1674   1        buffer[9]= bcd_hex(*(Atributos_Expedidor +  DateTime_hour))   + 0x30;
 1675   1        buffer[10]= bcd_hex(*(Atributos_Expedidor + DateTime_minutes))+ 0x30;
@@ -1854,7 +1854,7 @@ line level    source
 1733   1          {
 1734   2          buffer[4]=NULL;
 1735   2          strcpy(ticket, Lee_No_Ticket());
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 30  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 30  
 
 1736   2          strcat(buffer , ticket);
 1737   2          }
@@ -1918,7 +1918,7 @@ line level    source
 1795          unsigned char Load_Secuencia_Expedidor(unsigned char *Secuencia_Expedidor,unsigned const  estadoactivo,uns
              -igned const estadoactual,unsigned const estadofuturo)
 1796          {
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 31  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 31  
 
 1797   1        *(Secuencia_Expedidor + EstadoPasado ) = estadoactivo ;
 1798   1        *(Secuencia_Expedidor + EstadoActual ) = estadoactual;
@@ -1982,7 +1982,7 @@ line level    source
 1854   1        return Estado_expedidor;
 1855   1      }
 1856          unsigned char Send_Pto_Paralelo(unsigned char *Atributos_Expedidor)
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 32  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 32  
 
 1857          {
 1858   1        unsigned char *Trama_Expedidor ;
@@ -2046,7 +2046,7 @@ line level    source
 1916   5                
 1917   5                 lock=OFF;
 1918   5                 Timer_wait=0;
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 33  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 33  
 
 1919   5                 Estado_expedidor=SEQ_ESPERA_VEHICULO_ENTRE;
 1920   5                 //Estado_expedidor=SEQ_INICIO;;
@@ -2110,7 +2110,7 @@ line level    source
 1978   1      }
 1979          /*unsigned char Valida_Vehiculo_Card_Mensual(unsigned char *Atributos_Expedidor)
 1980          {
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 34  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 34  
 
 1981            unsigned char Estado_expedidor;
 1982            
@@ -2174,7 +2174,7 @@ line level    source
 2040          //      else 
 2041          //      {
 2042          //        send_portERR(PRMR_TARJETA_VENCIDA); 
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 35  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 35  
 
 2043                      
 2044          //        PantallaLCD(TARJETA_VENCIDA);
@@ -2238,7 +2238,7 @@ line level    source
 2101   1        // {
 2102   1        //  send_portERR(PRMR_NO_CARD_MENSUAL);
 2103   1        //  PantallaLCD(NO_CARD_MENSUAL);     
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 36  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 36  
 
 2104   1        //  Estado_expedidor =  SEQ_CAPTURE_CARD; //Captura_Expulsa();  
 2105   1        // } 
@@ -2302,7 +2302,7 @@ line level    source
 2162            year = bcd_hex(lee_clk(RANO));
 2163            
 2164            if (year==20)
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 37  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 37  
 
 2165            {
 2166              if (((month==1)&&(day==1))||((month==1)&&(day==6))||((month==3)&&(day==23))||((month==4)&&(day==9))||((m
@@ -2366,7 +2366,7 @@ line level    source
 2215          {
 2216            unsigned char Par_Impar;
 2217            unsigned char dato;
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 38  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 38  
 
 2218            
 2219            if( Festivos() == False)
@@ -2430,7 +2430,7 @@ line level    source
 2277                  /*miramos si esta en el rango del horario*/
 2278            /*      Estado_Horario = Bloque_Horario(addr);
 2279                }
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 39  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 39  
 
 2280                else
 2281                {
@@ -2494,7 +2494,7 @@ line level    source
 2339              else
 2340              {
 2341                //send_portERR(PRMR_MENSUAL_FUERA_HORARIO);
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 40  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 40  
 
 2342                //PantallaLCD(MENSUAL_FUERA_HORARIO);
 2343                Debug_txt_Tibbo((unsigned char *) "DESPUES DEL HORARIO PROGRAMADO\r\n");
@@ -2558,7 +2558,7 @@ line level    source
 2401          funcion  de los cmd de inicio (reset dispositivo y graba eeprom) retorna un (00) cuando a terminado exitos
              -o
 2402          ------------------------------------------------------------------------------*/
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 41  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 41  
 
 2403          
 2404          
@@ -2622,7 +2622,7 @@ line level    source
 2461   2            
 2462   2            case GRABA_EEPROM:
 2463   2              
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 42  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 42  
 
 2464   2              Dwload_EEprom();                                                                    //envio el cmd de grabar la eeprom
 2465   2              Estado=SEQ_CAPTURA_OK_EEPROM;                                                       // entra a validar la respuesta del transport
@@ -2686,7 +2686,7 @@ line level    source
 2521   2              return Estado=INICIA_LINTECH; 
 2522   2              break;
 2523   2        }
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 43  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 43  
 
 2524   1      }
 2525          
@@ -2750,7 +2750,7 @@ line level    source
 2578   2            break;
 2579   2          case SEQ_READ_SECTOR_BLOQUE:
 2580   2            RD_MF(Atributos_Expedidor [ Sector ],Atributos_Expedidor [ Bloque ]);
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 44  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 44  
 
 2581   2            EstadoActivo=Load_Secuencia_Expedidor(Secuencia_Expedidor,EstadoActivo,SEQ_CMD_ACEPTADO,SEQ_RESPUESTA_T
              -RANSPORTE);
@@ -2814,7 +2814,7 @@ line level    source
 2633   2            EstadoActivo = Load_Secuencia_Expedidor(Secuencia_Expedidor,EstadoActivo,SEQ_CMD_ACEPTADO,SEQ_RESPUESTA
              -_TRANSPORTE);    
 2634   2            Secuencia_Expedidor[TareadelCmd ] = TAREA_UID ;
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 45  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 45  
 
 2635   2            break;
 2636   2          case SEQ_LPR:
@@ -2878,7 +2878,7 @@ line level    source
 2690   3              if (rx_ip==0)                                                         /*pregunto si llega datos de monitor pto serie emulado*/
 2691   3              {
 2692   4                 Rx_Monitor();
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 46  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 46  
 
 2693   4              }
 2694   3            }
@@ -2942,7 +2942,7 @@ line level    source
 2752   3                  EstadoActivo = Respuesta_Segunda_clave(Atributos_Expedidor,Buffer_Write_MF);
 2753   3                }
 2754   2                    
-C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:49:18 PAGE 47  
+C51 COMPILER V9.59.0.0   VERIFICADOR                                                       08/31/2021 16:51:48 PAGE 47  
 
 2755   2            else if (Secuencia_Expedidor [TareadelCmd] == TAREA_UID ) 
 2756   2                {

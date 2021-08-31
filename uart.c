@@ -29,6 +29,7 @@ bit aSk=0; 									/*indica que llego el 06 = ask de que recivio el msj*/
 
 /*funciones*/
 extern unsigned char rd_eeprom (unsigned char control,unsigned int Dir); 
+extern void wr_eeprom (unsigned char control,unsigned int Dir, unsigned char data_eeprom);
 /*------------------------------------------------------------------------------
 Notes:
 
@@ -336,6 +337,7 @@ TMOD |= 0x20;       /* put timer 1 into MODE 2 */
 	}
 	else
 	{
+//		wr_eeprom(0xa8,EE_BAUDIO,0xff);
 	TH1 =1;// (unsigned char) (256 - (XTAL / (16L * 12L * baudrate)));
 	TL1=1;
 	TR1 = 1; 

@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   MONITOR                                                           08/31/2021 14:47:17 PAGE 1   
+C51 COMPILER V9.59.0.0   MONITOR                                                           08/31/2021 16:49:19 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE MONITOR
@@ -62,7 +62,7 @@ line level    source
   52          {
   53   1        unsigned char j, NumDatos,time_out,MaxChrRx;
   54   1        unsigned int contador;
-C51 COMPILER V9.59.0.0   MONITOR                                                           08/31/2021 14:47:17 PAGE 2   
+C51 COMPILER V9.59.0.0   MONITOR                                                           08/31/2021 16:49:19 PAGE 2   
 
   55   1        
   56   1          NumDatos=0;
@@ -126,7 +126,7 @@ line level    source
  114   2            /*placa 0 el cancel borra la fecha del mensual */
  115   2            do
  116   2            {
-C51 COMPILER V9.59.0.0   MONITOR                                                           08/31/2021 14:47:17 PAGE 3   
+C51 COMPILER V9.59.0.0   MONITOR                                                           08/31/2021 16:49:19 PAGE 3   
 
  117   3              placa[j]=*(buffer+p);
  118   3              p++;

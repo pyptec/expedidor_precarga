@@ -337,10 +337,10 @@ TMOD |= 0x20;       /* put timer 1 into MODE 2 */
 	}
 	else
 	{
-//		wr_eeprom(0xa8,EE_BAUDIO,0xff);
-	TH1 =1;// (unsigned char) (256 - (XTAL / (16L * 12L * baudrate)));
-	TL1=1;
-	TR1 = 1; 
+		wr_eeprom(0xa8,EE_BAUDIO,0xff);
+	TH1 =0xf4;// (unsigned char) (256 - (XTAL / (16L * 12L * baudrate)));
+	TL1=0xf4;
+	TR1 =0xf4; 
 	}
 }
 

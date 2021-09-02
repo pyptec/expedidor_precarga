@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   UART                                                              08/31/2021 16:51:47 PAGE 1   
+C51 COMPILER V9.59.0.0   UART                                                              09/02/2021 16:32:26 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE UART
@@ -62,7 +62,7 @@ line level    source
   52          
   53          
   54          
-C51 COMPILER V9.59.0.0   UART                                                              08/31/2021 16:51:47 PAGE 2   
+C51 COMPILER V9.59.0.0   UART                                                              09/02/2021 16:32:26 PAGE 2   
 
   55          /*tiempo de delay entre funciones*/
   56          #define TIME_CARD       5     //50
@@ -126,7 +126,7 @@ line level    source
  114   2        cDatoRx=SBUF;
  115   2        if (((r_in - r_out) & ~(RBUF_SIZE-1)) == 0)
  116   2          {
-C51 COMPILER V9.59.0.0   UART                                                              08/31/2021 16:51:47 PAGE 3   
+C51 COMPILER V9.59.0.0   UART                                                              09/02/2021 16:32:26 PAGE 3   
 
  117   3          rbuf [r_in & (RBUF_SIZE-1)] = cDatoRx;    //cDatoRx;
  118   3          r_in++;
@@ -190,7 +190,7 @@ line level    source
  176   3          break;
  177   3      /*------------------------------------------------------------------------------------------------
  178   3          se almacena los datos 
-C51 COMPILER V9.59.0.0   UART                                                              08/31/2021 16:51:47 PAGE 4   
+C51 COMPILER V9.59.0.0   UART                                                              09/02/2021 16:32:26 PAGE 4   
 
  179   3      /*-------------------------------------------------------------------------------------------------*/
  180   3          case STORE_DATA:
@@ -254,7 +254,7 @@ line level    source
  238   1      Transmitted data interrupt.
  239   1      ------------------------------------------------*/
  240   1      if (TI != 0)
-C51 COMPILER V9.59.0.0   UART                                                              08/31/2021 16:51:47 PAGE 5   
+C51 COMPILER V9.59.0.0   UART                                                              09/02/2021 16:32:26 PAGE 5   
 
  241   1        {
  242   2        TI = 0;
@@ -318,7 +318,7 @@ line level    source
  300   1      ES = 1;             /* enable serial interrupts */
  301   1      PS = 1;             /* set serial interrupts to low priority */
  302   1      }
-C51 COMPILER V9.59.0.0   UART                                                              08/31/2021 16:51:47 PAGE 6   
+C51 COMPILER V9.59.0.0   UART                                                              09/02/2021 16:32:26 PAGE 6   
 
  303          
  304          /*------------------------------------------------------------------------------
@@ -357,10 +357,10 @@ line level    source
  337   2        }
  338   1        else
  339   1        {
- 340   2      //    wr_eeprom(0xa8,EE_BAUDIO,0xff);
- 341   2        TH1 =1;// (unsigned char) (256 - (XTAL / (16L * 12L * baudrate)));
- 342   2        TL1=1;
- 343   2        TR1 = 1; 
+ 340   2          wr_eeprom(0xa8,EE_BAUDIO,0xff);
+ 341   2        TH1 =0xf4;// (unsigned char) (256 - (XTAL / (16L * 12L * baudrate)));
+ 342   2        TL1=0xf4;
+ 343   2        TR1 =0xf4; 
  344   2        }
  345   1      }
  346          
@@ -382,7 +382,7 @@ line level    source
  362   1      ------------------------------------------------*/
  363   1      tbuf [t_in & (TBUF_SIZE - 1)] = c;
  364   1      
-C51 COMPILER V9.59.0.0   UART                                                              08/31/2021 16:51:47 PAGE 7   
+C51 COMPILER V9.59.0.0   UART                                                              09/02/2021 16:32:26 PAGE 7   
 
  365   1        t_in++;
  366   1      
@@ -446,7 +446,7 @@ line level    source
  424              if (t_in != t_out)
  425              {
  426              SBUF = tbuf [t_out & (TBUF_SIZE-1)];
-C51 COMPILER V9.59.0.0   UART                                                              08/31/2021 16:51:47 PAGE 8   
+C51 COMPILER V9.59.0.0   UART                                                              09/02/2021 16:32:26 PAGE 8   
 
  427              t_out++;
  428              ti_restart = 0;
@@ -463,7 +463,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    738    ----
+   CODE SIZE        =    741    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =      3       1
    PDATA SIZE       =   ----    ----

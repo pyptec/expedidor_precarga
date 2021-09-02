@@ -405,7 +405,7 @@ while(*res !='\0'){
   wr_eeprom(0xa8,addres,0);
 
 }
-void Formato_eeprom()
+/*void Formato_eeprom()
 {
 unsigned char dato=0xff;
 unsigned int i;
@@ -417,4 +417,4 @@ unsigned char password[7]	;
 			wr_eeprom(0xa8 ,EE_BAUDIO,00);	
 		strcpy(password, "nataly");
 		Dwload_EEprom_prog(password);	
-}
+}*/

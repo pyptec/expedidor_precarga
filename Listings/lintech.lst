@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 1   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE LINTECH
@@ -62,7 +62,7 @@ line level    source
   52          extern void EscribirCadenaSoft_buffer(unsigned char *buffer,unsigned char tamano_cadena);
   53          extern void Debug_chr_Tibbo(unsigned char Dat);
   54          extern unsigned char Dir_board();
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 2   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 2   
 
   55          
   56          /*atributos */
@@ -126,7 +126,7 @@ line level    source
  114   1      
  115   1        if (Detalle == SENSOR_NORMAL)
  116   1          {
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 3   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 3   
 
  117   2            Debug_txt_Tibbo((unsigned char *) "Check_Status SENSOR_NORMAL\r\n");
  118   2          }
@@ -190,7 +190,7 @@ line level    source
  176   1        g_scArrTxComSoft[4]='C';
  177   1        g_scArrTxComSoft[5]='3';
  178   1      
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 4   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 4   
 
  179   1        g_scArrTxComSoft[7]=ETX;
  180   1        for (j=0; j<8; j++)
@@ -254,7 +254,7 @@ line level    source
  237   2          g_scArrTxComSoft[5]='2';
  238   2          g_scArrTxComSoft[6]=Posicion;
  239   2          g_scArrTxComSoft[7]=ETX;
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 5   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 5   
 
  240   2          for (j=0; j<8; j++)
  241   2          {
@@ -318,7 +318,7 @@ line level    source
  299   1        g_scArrTxComSoft[4]='C';
  300   1        g_scArrTxComSoft[5]=0x60;
  301   1        g_scArrTxComSoft[6]='3';
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 6   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 6   
 
  302   1        g_scArrTxComSoft[7]=0x00;
  303   1        g_scArrTxComSoft[8]=0x20;
@@ -382,7 +382,7 @@ line level    source
  361   1        g_scArrTxComSoft[18]=ETX;
  362   1        
  363   1        for (j=0; j<19; j++)
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 7   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 7   
 
  364   1          {
  365   2            bcc=g_scArrTxComSoft[j]^bcc;
@@ -394,263 +394,265 @@ line level    source
  371   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,20);   /* envio la trama por el pto serie*/
  372   1          ValTimeOutCom=TIME_CARD;
  373   1      }
- 374            void Dwload_EEprom_prog(unsigned char *password)
- 375            {
- 376   1          unsigned char j, bcc;
- 377   1        unsigned char g_scArrTxComSoft[21];
- 378   1        bcc=0;
- 379   1        Debug_txt_Tibbo((unsigned char *) "Download MF EEprom\r\n");
- 380   1        
- 381   1        g_scArrTxComSoft[0]=0xF2;
- 382   1        g_scArrTxComSoft[1]=0X00;
- 383   1        g_scArrTxComSoft[2]=0X00;
- 384   1        g_scArrTxComSoft[3]=0X0E;
- 385   1        g_scArrTxComSoft[4]='C';
- 386   1        g_scArrTxComSoft[5]=0x60;
- 387   1        g_scArrTxComSoft[6]='3';
- 388   1        g_scArrTxComSoft[7]=0x00;
- 389   1        g_scArrTxComSoft[8]=0Xd0;
- 390   1        g_scArrTxComSoft[9]=0X00;
- 391   1        g_scArrTxComSoft[10]=0X01;
- 392   1        g_scArrTxComSoft[11]=0x06;
- 393   1        g_scArrTxComSoft[12]=*password; //33
- 394   1        g_scArrTxComSoft[13]=*(password+1);//56
- 395   1        g_scArrTxComSoft[14]=*(password+2);//30
- 396   1        g_scArrTxComSoft[15]=*(password+3);//70
- 397   1        g_scArrTxComSoft[16]=*(password+4);//34
- 398   1        g_scArrTxComSoft[17]=*(password+5);//72
- 399   1        g_scArrTxComSoft[18]=ETX;
- 400   1        
- 401   1        for (j=0; j<19; j++)
- 402   1          {
- 403   2            bcc=g_scArrTxComSoft[j]^bcc;
- 404   2          }
- 405   1          g_scArrTxComSoft[19]=bcc;
- 406   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
- 407   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
- 408   1          DebugBufferMF(g_scArrTxComSoft,20,0);               /*muestra la trama enviada al pto serie a debug por tibbo*/
- 409   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,20);   /* envio la trama por el pto serie*/
- 410   1          ValTimeOutCom=TIME_CARD;
- 411   1        }
- 412          /*------------------------------------------------------------------------------
- 413          Funcion q verifica si la clave y la carga en el transporte
- 414          ------------------------------------------------------------------------------*/
- 415          
- 416          void LoadVerify_EEprom(void)
- 417          {
- 418   1        unsigned char j, bcc;
- 419   1        unsigned char g_scArrTxComSoft[15];
- 420   1        bcc=0;
- 421   1        Debug_txt_Tibbo((unsigned char *) "Carga y Verifica de EEprom\r\n");
- 422   1      
+ 374          /*
+ 375            void Dwload_EEprom_prog(unsigned char *password)
+ 376            {
+ 377              unsigned char j, bcc;
+ 378            unsigned char g_scArrTxComSoft[21];
+ 379            bcc=0;
+ 380            Debug_txt_Tibbo((unsigned char *) "Download MF EEprom\r\n");
+ 381            
+ 382            g_scArrTxComSoft[0]=0xF2;
+ 383            g_scArrTxComSoft[1]=0X00;
+ 384            g_scArrTxComSoft[2]=0X00;
+ 385            g_scArrTxComSoft[3]=0X0E;
+ 386            g_scArrTxComSoft[4]='C';
+ 387            g_scArrTxComSoft[5]=0x60;
+ 388            g_scArrTxComSoft[6]='3';
+ 389            g_scArrTxComSoft[7]=0x00;
+ 390            g_scArrTxComSoft[8]=0Xd0;
+ 391            g_scArrTxComSoft[9]=0X00;
+ 392            g_scArrTxComSoft[10]=0X01;
+ 393            g_scArrTxComSoft[11]=0x06;
+ 394            g_scArrTxComSoft[12]=*password; //33
+ 395            g_scArrTxComSoft[13]=*(password+1);//56
+ 396            g_scArrTxComSoft[14]=*(password+2);//30
+ 397            g_scArrTxComSoft[15]=*(password+3);//70
+ 398            g_scArrTxComSoft[16]=*(password+4);//34
+ 399            g_scArrTxComSoft[17]=*(password+5);//72
+ 400            g_scArrTxComSoft[18]=ETX;
+ 401            
+ 402            for (j=0; j<19; j++)
+ 403              {
+ 404                bcc=g_scArrTxComSoft[j]^bcc;
+ 405              }
+ 406              g_scArrTxComSoft[19]=bcc;
+ 407              buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
+ 408            //  g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
+ 409            //  DebugBufferMF(g_scArrTxComSoft,20,0);               /*muestra la trama enviada al pto serie a debug por tibbo
+             -*/
+ 410            //  EscribirCadenaSoft_buffer(g_scArrTxComSoft,20);   /* envio la trama por el pto serie*/
+ 411            //  ValTimeOutCom=TIME_CARD;
+ 412            //}*/
+ 413          /*------------------------------------------------------------------------------
+ 414          Funcion q verifica si la clave y la carga en el transporte
+ 415          ------------------------------------------------------------------------------*/
+ 416          
+ 417          void LoadVerify_EEprom(void)
+ 418          {
+ 419   1        unsigned char j, bcc;
+ 420   1        unsigned char g_scArrTxComSoft[15];
+ 421   1        bcc=0;
+ 422   1        Debug_txt_Tibbo((unsigned char *) "Carga y Verifica de EEprom\r\n");
  423   1      
- 424   1        g_scArrTxComSoft[0]=0xF2;
- 425   1        g_scArrTxComSoft[1]=0X00;
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 8   
+ 424   1      
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 8   
 
- 426   1        g_scArrTxComSoft[2]=0X00;
- 427   1        g_scArrTxComSoft[3]=0X07;
- 428   1        g_scArrTxComSoft[4]='C';
- 429   1        g_scArrTxComSoft[5]=0x60;
- 430   1        g_scArrTxComSoft[6]='3';
- 431   1        g_scArrTxComSoft[7]=0x00;
- 432   1        g_scArrTxComSoft[8]=0x21;
- 433   1        g_scArrTxComSoft[9]=0x00;
- 434   1        g_scArrTxComSoft[10]=0x01;
- 435   1        g_scArrTxComSoft[11]=ETX;
- 436   1        
- 437   1      
- 438   1        
- 439   1      
- 440   1        for (j=0; j<12; j++)
- 441   1          {
- 442   2            bcc=g_scArrTxComSoft[j]^bcc;
- 443   2          }
- 444   1          g_scArrTxComSoft[12]=bcc;
- 445   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
- 446   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
- 447   1          DebugBufferMF(g_scArrTxComSoft,13,0);               /*muestra la trama enviada al pto serie a debug por tibbo*/
- 448   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,13);   /* envio la trama por el pto serie*/
- 449   1          ValTimeOutCom=TIME_CARD;
- 450   1          
- 451   1      }
- 452          
- 453          /*------------------------------------------------------------------------------
- 454          Funcion q lee la MF dandole el sector y el bloque
- 455          ------------------------------------------------------------------------------*/
- 456          
- 457          void RD_MF(unsigned char Sector, unsigned char Bloque)
- 458          {
- 459   1      
- 460   1        unsigned char j, bcc;
- 461   1        unsigned char g_scArrTxComSoft[15];
- 462   1        bcc=0;
- 463   1      
- 464   1        Debug_txt_Tibbo((unsigned char *) "Leyendo MF > Sector: ");
- 465   1        Debug_chr_Tibbo(Sector);
- 466   1        
- 467   1        Debug_txt_Tibbo((unsigned char *) " Bloque: ");
- 468   1        Debug_chr_Tibbo(Bloque);
- 469   1        Debug_txt_Tibbo((unsigned char *) "\r\n");
- 470   1      
+ 425   1        g_scArrTxComSoft[0]=0xF2;
+ 426   1        g_scArrTxComSoft[1]=0X00;
+ 427   1        g_scArrTxComSoft[2]=0X00;
+ 428   1        g_scArrTxComSoft[3]=0X07;
+ 429   1        g_scArrTxComSoft[4]='C';
+ 430   1        g_scArrTxComSoft[5]=0x60;
+ 431   1        g_scArrTxComSoft[6]='3';
+ 432   1        g_scArrTxComSoft[7]=0x00;
+ 433   1        g_scArrTxComSoft[8]=0x21;
+ 434   1        g_scArrTxComSoft[9]=0x00;
+ 435   1        g_scArrTxComSoft[10]=0x01;
+ 436   1        g_scArrTxComSoft[11]=ETX;
+ 437   1        
+ 438   1      
+ 439   1        
+ 440   1      
+ 441   1        for (j=0; j<12; j++)
+ 442   1          {
+ 443   2            bcc=g_scArrTxComSoft[j]^bcc;
+ 444   2          }
+ 445   1          g_scArrTxComSoft[12]=bcc;
+ 446   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
+ 447   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
+ 448   1          DebugBufferMF(g_scArrTxComSoft,13,0);               /*muestra la trama enviada al pto serie a debug por tibbo*/
+ 449   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,13);   /* envio la trama por el pto serie*/
+ 450   1          ValTimeOutCom=TIME_CARD;
+ 451   1          
+ 452   1      }
+ 453          
+ 454          /*------------------------------------------------------------------------------
+ 455          Funcion q lee la MF dandole el sector y el bloque
+ 456          ------------------------------------------------------------------------------*/
+ 457          
+ 458          void RD_MF(unsigned char Sector, unsigned char Bloque)
+ 459          {
+ 460   1      
+ 461   1        unsigned char j, bcc;
+ 462   1        unsigned char g_scArrTxComSoft[15];
+ 463   1        bcc=0;
+ 464   1      
+ 465   1        Debug_txt_Tibbo((unsigned char *) "Leyendo MF > Sector: ");
+ 466   1        Debug_chr_Tibbo(Sector);
+ 467   1        
+ 468   1        Debug_txt_Tibbo((unsigned char *) " Bloque: ");
+ 469   1        Debug_chr_Tibbo(Bloque);
+ 470   1        Debug_txt_Tibbo((unsigned char *) "\r\n");
  471   1      
- 472   1        g_scArrTxComSoft[0]=0xF2;
- 473   1        g_scArrTxComSoft[1]=0X00;                   
- 474   1        g_scArrTxComSoft[2]=0X00;
- 475   1        g_scArrTxComSoft[3]=0X08;
- 476   1        g_scArrTxComSoft[4]='C';
- 477   1        g_scArrTxComSoft[5]=0X60;
- 478   1        g_scArrTxComSoft[6]='3';
- 479   1        g_scArrTxComSoft[7]=0x00;
- 480   1        g_scArrTxComSoft[8]=0xb0;
- 481   1        g_scArrTxComSoft[9]=Sector;
- 482   1        g_scArrTxComSoft[10]=Bloque;
- 483   1        g_scArrTxComSoft[11]=0x01;
- 484   1        g_scArrTxComSoft[12]=ETX;
- 485   1      
- 486   1        for (j=0; j<13; j++)
- 487   1        {
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 9   
+ 472   1      
+ 473   1        g_scArrTxComSoft[0]=0xF2;
+ 474   1        g_scArrTxComSoft[1]=0X00;                   
+ 475   1        g_scArrTxComSoft[2]=0X00;
+ 476   1        g_scArrTxComSoft[3]=0X08;
+ 477   1        g_scArrTxComSoft[4]='C';
+ 478   1        g_scArrTxComSoft[5]=0X60;
+ 479   1        g_scArrTxComSoft[6]='3';
+ 480   1        g_scArrTxComSoft[7]=0x00;
+ 481   1        g_scArrTxComSoft[8]=0xb0;
+ 482   1        g_scArrTxComSoft[9]=Sector;
+ 483   1        g_scArrTxComSoft[10]=Bloque;
+ 484   1        g_scArrTxComSoft[11]=0x01;
+ 485   1        g_scArrTxComSoft[12]=ETX;
+ 486   1      
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 9   
 
- 488   2          bcc=g_scArrTxComSoft[j]^bcc;
- 489   2        }
- 490   1        g_scArrTxComSoft[13]=bcc;
- 491   1      
+ 487   1        for (j=0; j<13; j++)
+ 488   1        {
+ 489   2          bcc=g_scArrTxComSoft[j]^bcc;
+ 490   2        }
+ 491   1        g_scArrTxComSoft[13]=bcc;
  492   1      
- 493   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
- 494   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
- 495   1          DebugBufferMF(g_scArrTxComSoft,14,0);               /*muestra la trama enviada al pto serie a debug por tibbo*/
- 496   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,14);   /* envio la trama por el pto serie*/
- 497   1          ValTimeOutCom=TIME_CARD;
- 498   1      
- 499   1      }
- 500          
- 501          /*------------------------------------------------------------------------------
- 502          Funcion q lescribe la MF dandole el sector y el bloque y los datos
- 503          ------------------------------------------------------------------------------*/
- 504          
+ 493   1      
+ 494   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
+ 495   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
+ 496   1          DebugBufferMF(g_scArrTxComSoft,14,0);               /*muestra la trama enviada al pto serie a debug por tibbo*/
+ 497   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,14);   /* envio la trama por el pto serie*/
+ 498   1          ValTimeOutCom=TIME_CARD;
+ 499   1      
+ 500   1      }
+ 501          
+ 502          /*------------------------------------------------------------------------------
+ 503          Funcion q lescribe la MF dandole el sector y el bloque y los datos
+ 504          ------------------------------------------------------------------------------*/
  505          
- 506          void WR_MF(unsigned char Sector, unsigned char Bloque,unsigned char *buffer)     
- 507             
- 508          {
- 509   1        unsigned char j, bcc;
- 510   1        unsigned char g_scArrTxComSoft[31];
- 511   1        bcc=0;
- 512   1      
- 513   1        Debug_txt_Tibbo((unsigned char *) "Escribe MF > Sector: ");
- 514   1        Debug_chr_Tibbo(Sector);
- 515   1        
- 516   1        Debug_txt_Tibbo((unsigned char *) " Bloque: ");
- 517   1        Debug_chr_Tibbo(Bloque);
- 518   1        Debug_txt_Tibbo((unsigned char *) "\r\n");
- 519   1                                          
- 520   1        g_scArrTxComSoft[0]=0xF2;
- 521   1        g_scArrTxComSoft[1]=0X00;                   
- 522   1        g_scArrTxComSoft[2]=0X00;
- 523   1        g_scArrTxComSoft[3]=24;                                 /* Numero Datos a programar */ 
- 524   1        
- 525   1        g_scArrTxComSoft[4]='C';
- 526   1        g_scArrTxComSoft[5]=0X60;
- 527   1        g_scArrTxComSoft[6]='3';
- 528   1        g_scArrTxComSoft[7]=0x00;
- 529   1        g_scArrTxComSoft[8]=0xd1;
- 530   1        g_scArrTxComSoft[9]=Sector;                             //Sector;
- 531   1        g_scArrTxComSoft[10]=Bloque;                            //Bloque;
- 532   1        g_scArrTxComSoft[11]=0x01;
- 533   1      
- 534   1          for (j=0; j<=16; ++j)
- 535   1            {
- 536   2              g_scArrTxComSoft[j+12]=*(buffer + j); 
- 537   2            }
- 538   1        
- 539   1        g_scArrTxComSoft[28]=ETX;
- 540   1        
- 541   1        for (j=0; j<=28; j++)
- 542   1        {
- 543   2          bcc=bcc^g_scArrTxComSoft[j];
- 544   2        }
- 545   1        g_scArrTxComSoft[29]=bcc;
- 546   1      
- 547   1        
- 548   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
- 549   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 10  
+ 506          
+ 507          void WR_MF(unsigned char Sector, unsigned char Bloque,unsigned char *buffer)     
+ 508             
+ 509          {
+ 510   1        unsigned char j, bcc;
+ 511   1        unsigned char g_scArrTxComSoft[31];
+ 512   1        bcc=0;
+ 513   1      
+ 514   1        Debug_txt_Tibbo((unsigned char *) "Escribe MF > Sector: ");
+ 515   1        Debug_chr_Tibbo(Sector);
+ 516   1        
+ 517   1        Debug_txt_Tibbo((unsigned char *) " Bloque: ");
+ 518   1        Debug_chr_Tibbo(Bloque);
+ 519   1        Debug_txt_Tibbo((unsigned char *) "\r\n");
+ 520   1                                          
+ 521   1        g_scArrTxComSoft[0]=0xF2;
+ 522   1        g_scArrTxComSoft[1]=0X00;                   
+ 523   1        g_scArrTxComSoft[2]=0X00;
+ 524   1        g_scArrTxComSoft[3]=24;                                 /* Numero Datos a programar */ 
+ 525   1        
+ 526   1        g_scArrTxComSoft[4]='C';
+ 527   1        g_scArrTxComSoft[5]=0X60;
+ 528   1        g_scArrTxComSoft[6]='3';
+ 529   1        g_scArrTxComSoft[7]=0x00;
+ 530   1        g_scArrTxComSoft[8]=0xd1;
+ 531   1        g_scArrTxComSoft[9]=Sector;                             //Sector;
+ 532   1        g_scArrTxComSoft[10]=Bloque;                            //Bloque;
+ 533   1        g_scArrTxComSoft[11]=0x01;
+ 534   1      
+ 535   1          for (j=0; j<=16; ++j)
+ 536   1            {
+ 537   2              g_scArrTxComSoft[j+12]=*(buffer + j); 
+ 538   2            }
+ 539   1        
+ 540   1        g_scArrTxComSoft[28]=ETX;
+ 541   1        
+ 542   1        for (j=0; j<=28; j++)
+ 543   1        {
+ 544   2          bcc=bcc^g_scArrTxComSoft[j];
+ 545   2        }
+ 546   1        g_scArrTxComSoft[29]=bcc;
+ 547   1      
+ 548   1        
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 10  
 
- 550   1          DebugBufferMF(g_scArrTxComSoft,30,0);               /*muestra la trama enviada al pto serie a debug por tibbo*/
- 551   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,30);   /* envio la trama por el pto serie*/
- 552   1          ValTimeOutCom=TIME_CARD;
- 553   1        
- 554   1      }
- 555          //*******************************************************************************************
- 556          // rutina q mira el tipo de tarjeta si es valido para el uso  
- 557          //*******************************************************************************************
- 558          
- 559          void Unique_Identifier_UID(void)
- 560          {
- 561   1      unsigned char j, bcc;
- 562   1      unsigned char g_scArrTxComSoft[10];
- 563   1            bcc=0;
- 564   1        
- 565   1        Debug_txt_Tibbo((unsigned char *) "UID\r\n");
- 566   1        
- 567   1        g_scArrTxComSoft[0]=STX_LINTECH;
- 568   1          g_scArrTxComSoft[1]=0X00;
- 569   1          g_scArrTxComSoft[2]=0X00;
- 570   1          g_scArrTxComSoft[3]=0X05;
- 571   1          g_scArrTxComSoft[4]='C';
- 572   1          g_scArrTxComSoft[5]=0x60;
- 573   1          g_scArrTxComSoft[6]=0x30;
- 574   1          g_scArrTxComSoft[7]=0x41;
- 575   1          g_scArrTxComSoft[8]=0x30;
- 576   1          g_scArrTxComSoft[9]=ETX;
- 577   1            for (j=0; j<10; j++)
- 578   1          {
- 579   2            bcc=g_scArrTxComSoft[j]^bcc;
- 580   2          }
- 581   1          g_scArrTxComSoft[10]=bcc;
- 582   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
- 583   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
- 584   1          DebugBufferMF(g_scArrTxComSoft,11,0);               /*muestra la trama enviada al pto serie a debug por tibbo*/
- 585   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,11);   /* envio la trama por el pto serie*/
- 586   1          ValTimeOutCom=TIME_CARD;
- 587   1        } 
- 588          void Power_off(void)
- 589          {
- 590   1      unsigned char j, bcc;
- 591   1      unsigned char g_scArrTxComSoft[10];
- 592   1            bcc=0;
- 593   1        
- 594   1        Debug_txt_Tibbo((unsigned char *) "POWER OFF UID\r\n");
- 595   1        
- 596   1        g_scArrTxComSoft[0]=STX_LINTECH;
- 597   1          g_scArrTxComSoft[1]=0X00;
- 598   1          g_scArrTxComSoft[2]=0X00;
- 599   1          g_scArrTxComSoft[3]=0X03;
- 600   1          g_scArrTxComSoft[4]='C';
- 601   1          g_scArrTxComSoft[5]=0x60;
- 602   1          g_scArrTxComSoft[6]=0x31;
- 603   1          g_scArrTxComSoft[7]=ETX;
- 604   1            for (j=0; j<8; j++)
- 605   1          {
- 606   2            bcc=g_scArrTxComSoft[j]^bcc;
- 607   2          }
- 608   1          g_scArrTxComSoft[8]=bcc;
- 609   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
- 610   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
- 611   1          DebugBufferMF(g_scArrTxComSoft,9,0);                /*muestra la trama enviada al pto serie a debug por tibbo*/
-C51 COMPILER V9.59.0.0   LINTECH                                                           08/31/2021 16:51:48 PAGE 11  
+ 549   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
+ 550   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
+ 551   1          DebugBufferMF(g_scArrTxComSoft,30,0);               /*muestra la trama enviada al pto serie a debug por tibbo*/
+ 552   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,30);   /* envio la trama por el pto serie*/
+ 553   1          ValTimeOutCom=TIME_CARD;
+ 554   1        
+ 555   1      }
+ 556          //*******************************************************************************************
+ 557          // rutina q mira el tipo de tarjeta si es valido para el uso  
+ 558          //*******************************************************************************************
+ 559          
+ 560          void Unique_Identifier_UID(void)
+ 561          {
+ 562   1      unsigned char j, bcc;
+ 563   1      unsigned char g_scArrTxComSoft[10];
+ 564   1            bcc=0;
+ 565   1        
+ 566   1        Debug_txt_Tibbo((unsigned char *) "UID\r\n");
+ 567   1        
+ 568   1        g_scArrTxComSoft[0]=STX_LINTECH;
+ 569   1          g_scArrTxComSoft[1]=0X00;
+ 570   1          g_scArrTxComSoft[2]=0X00;
+ 571   1          g_scArrTxComSoft[3]=0X05;
+ 572   1          g_scArrTxComSoft[4]='C';
+ 573   1          g_scArrTxComSoft[5]=0x60;
+ 574   1          g_scArrTxComSoft[6]=0x30;
+ 575   1          g_scArrTxComSoft[7]=0x41;
+ 576   1          g_scArrTxComSoft[8]=0x30;
+ 577   1          g_scArrTxComSoft[9]=ETX;
+ 578   1            for (j=0; j<10; j++)
+ 579   1          {
+ 580   2            bcc=g_scArrTxComSoft[j]^bcc;
+ 581   2          }
+ 582   1          g_scArrTxComSoft[10]=bcc;
+ 583   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
+ 584   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
+ 585   1          DebugBufferMF(g_scArrTxComSoft,11,0);               /*muestra la trama enviada al pto serie a debug por tibbo*/
+ 586   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,11);   /* envio la trama por el pto serie*/
+ 587   1          ValTimeOutCom=TIME_CARD;
+ 588   1        } 
+ 589          void Power_off(void)
+ 590          {
+ 591   1      unsigned char j, bcc;
+ 592   1      unsigned char g_scArrTxComSoft[10];
+ 593   1            bcc=0;
+ 594   1        
+ 595   1        Debug_txt_Tibbo((unsigned char *) "POWER OFF UID\r\n");
+ 596   1        
+ 597   1        g_scArrTxComSoft[0]=STX_LINTECH;
+ 598   1          g_scArrTxComSoft[1]=0X00;
+ 599   1          g_scArrTxComSoft[2]=0X00;
+ 600   1          g_scArrTxComSoft[3]=0X03;
+ 601   1          g_scArrTxComSoft[4]='C';
+ 602   1          g_scArrTxComSoft[5]=0x60;
+ 603   1          g_scArrTxComSoft[6]=0x31;
+ 604   1          g_scArrTxComSoft[7]=ETX;
+ 605   1            for (j=0; j<8; j++)
+ 606   1          {
+ 607   2            bcc=g_scArrTxComSoft[j]^bcc;
+ 608   2          }
+ 609   1          g_scArrTxComSoft[8]=bcc;
+ 610   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/02/2021 16:32:26 PAGE 11  
 
- 612   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,9);    /* envio la trama por el pto serie*/
- 613   1          ValTimeOutCom=TIME_CARD;
- 614   1      
+ 611   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
+ 612   1          DebugBufferMF(g_scArrTxComSoft,9,0);                /*muestra la trama enviada al pto serie a debug por tibbo*/
+ 613   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,9);    /* envio la trama por el pto serie*/
+ 614   1          ValTimeOutCom=TIME_CARD;
  615   1      
- 616   1      }
+ 616   1      
+ 617   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   2215    ----
+   CODE SIZE        =   1993    ----
    CONSTANT SIZE    =    419    ----
-   XDATA SIZE       =   ----     218
+   XDATA SIZE       =   ----     193
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----

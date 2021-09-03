@@ -2597,7 +2597,8 @@ unsigned char SecuenciaExpedidorMF( unsigned char EstadoActivo)
 		case SEQ_CAPTURE_CARD:
 			Mov_Card(MovPos_Capture);
 			EstadoActivo=Load_Secuencia_Expedidor(Secuencia_Expedidor,EstadoActivo,SEQ_CMD_ACEPTADO,SEQ_INICIO);		 //SEQ_INICIOSEQ_MOVER_CARD_RF
-			break;
+			Atascado_GP0_PIN_3 = OFF;			
+		break;
 		case SEQ_CARD_INSERCION_OFF:
 			Card_Insercion(Inhabilita);
 			EstadoActivo=Load_Secuencia_Expedidor(Secuencia_Expedidor,EstadoActivo,SEQ_CMD_ACEPTADO,SEQ_EXPULSAR_CARD);

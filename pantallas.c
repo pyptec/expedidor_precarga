@@ -101,7 +101,7 @@ unsigned char Ini_LCD_Line_one   []={0xaa,0x80,0x18,0x01,0x02,0x00} ;
 //unsigned char Ini_Off_Line []={0xaa,0x80,0x18,0x01,0x03,0x00} ;
 	
 unsigned char num_chr;
-unsigned char xdata  *msjpantalla = 0;
+unsigned char msjpantalla[40];
 
 	//init_mempool(malloc_memoria,40);
 	//msjpantalla=malloc(40);
@@ -513,7 +513,7 @@ unsigned char xdata  *msjpantalla = 0;
 					break;	
          }
 				// free(msjpantalla);
-				 msjpantalla=0;
+				 msjpantalla[0]=0;
          sel_com=1;   
       }
       

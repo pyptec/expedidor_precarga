@@ -27,7 +27,7 @@ extern unsigned char *Lee_No_Ticket();
 extern char  *strcpy  (char *s1, const char *s2);
 extern void Debug_chr_Tibbo(unsigned char Dat);
 extern void  send_port(unsigned char *buffer_port, unsigned char length_char);
-extern void Formato_eeprom();
+extern void confirmacion();
 /*------------------------------------------------------------------------------*/
 			/*variables externas */
 extern unsigned int Timer_tivo;
@@ -234,7 +234,7 @@ void Valida_Trama_Pto(unsigned char *buffer, unsigned char length_trama)
 				/*-------------------------------	CMD 55 PRMR_MSJ_EXCLUSIVO  ------------------------------------------------------------------*/
 		else if ((length_trama==3)&&(*(buffer+1)==PRMR_MSJ_EXCLUSIVO)&&*(buffer+(length_trama-1))==ETX)																																				/* */
 		{
-				// Formato_eeprom();																																														/*mesualidad vencida*/
+				 confirmacion();																																														/*mesualidad vencida*/
 		}	
 			/*-------------------------------CMD A1    DIREJASE_A_CAJA	              ------------------------------------------------------------------*/
 		else if ((length_trama==1)&&(*buffer==PRMR_DIREJASE_A_CAJA	))																																				/*cmd 0xA1 audio caja que es igual a no registra pago */

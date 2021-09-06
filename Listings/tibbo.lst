@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   TIBBO                                                             09/03/2021 14:20:35 PAGE 1   
+C51 COMPILER V9.59.0.0   TIBBO                                                             09/06/2021 11:57:57 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TIBBO
@@ -62,7 +62,7 @@ line level    source
   52   1      }
   53          /*------------------------------------------------------------------------------
   54          ------------------------------------------------------------------------------*/
-C51 COMPILER V9.59.0.0   TIBBO                                                             09/03/2021 14:20:35 PAGE 2   
+C51 COMPILER V9.59.0.0   TIBBO                                                             09/06/2021 11:57:57 PAGE 2   
 
   55          void time_mbit(void)
   56          {
@@ -126,7 +126,7 @@ line level    source
  114   1        time_bit(); 
  115   1      
  116   1        EA=True;
-C51 COMPILER V9.59.0.0   TIBBO                                                             09/03/2021 14:20:35 PAGE 3   
+C51 COMPILER V9.59.0.0   TIBBO                                                             09/06/2021 11:57:57 PAGE 3   
 
  117   1      }
  118          
@@ -190,7 +190,7 @@ line level    source
  176   1          (temp>0x09)?(temp=temp+0x37):(temp=temp+0x30);
  177   1        d=putchar(temp);
  178   1        d=putchar(' ');
-C51 COMPILER V9.59.0.0   TIBBO                                                             09/03/2021 14:20:35 PAGE 4   
+C51 COMPILER V9.59.0.0   TIBBO                                                             09/06/2021 11:57:57 PAGE 4   
 
  179   1      }
  180          /*------------------------------------------------------------------------------
@@ -254,7 +254,7 @@ line level    source
  238   3              tx_aux(str[i]);
  239   3          }
  240   2          
-C51 COMPILER V9.59.0.0   TIBBO                                                             09/03/2021 14:20:35 PAGE 5   
+C51 COMPILER V9.59.0.0   TIBBO                                                             09/06/2021 11:57:57 PAGE 5   
 
  241   2        }
  242   1      }
@@ -318,7 +318,7 @@ line level    source
  300   1      //------------------------------------------------------------------------------------
  301   1          time_bit();
  302   1      //------------------------------------------------------------------------------------
-C51 COMPILER V9.59.0.0   TIBBO                                                             09/03/2021 14:20:35 PAGE 6   
+C51 COMPILER V9.59.0.0   TIBBO                                                             09/06/2021 11:57:57 PAGE 6   
 
  303   1          temporal=(rx_ip==0)?(temporal&0x7f):(temporal|0x80);
  304   1          temporal>>=1;
@@ -382,7 +382,7 @@ line level    source
  362   1      } 
 
 
-C51 COMPILER V9.59.0.0   TIBBO                                                             09/03/2021 14:20:35 PAGE 7   
+C51 COMPILER V9.59.0.0   TIBBO                                                             09/06/2021 11:57:57 PAGE 7   
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    940    ----

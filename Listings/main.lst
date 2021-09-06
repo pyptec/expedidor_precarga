@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   MAIN                                                              09/03/2021 14:20:34 PAGE 1   
+C51 COMPILER V9.59.0.0   MAIN                                                              09/06/2021 11:57:56 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE MAIN
@@ -14,223 +14,224 @@ line level    source
    4          Diseñado Ing. Jaime Pedraza
    5          ------------------------------------------------------------------------------*/
    6          #include <main.h>
-   7          /*------------------------------------------------------------------------------
-   8          interrupcion por timer 
-   9          ValTimeOutCom se decrementa cada overflow de la interrupcion
-  10          Timer_wait    Incrementa cada overflow de la interrrupcion
-  11          clock=22.1184mhz
-  12          ciclo de mqn= clock/12 =0.5nseg
-  13          timer= ciclo mqn* reloj = 0.5 x65535 =32
-  14          temporizado=timer* ValTimeOutCom = 32*100=320ms
-  15          ------------------------------------------------------------------------------*/
-  16           timer0_int() interrupt 1 using 2
-  17              {
-  18   1            
-  19   1            ValTimeOutCom--;
-  20   1            if (ValTimeOutCom == 1)
-  21   1            {
-  22   2              Timer_wait++;
-  23   2            }
-  24   1            
-  25   1            Timer_tivo++;
-  26   1            TF0=0;
-  27   1            
-  28   1          }
-  29          /*------------------------------------------------------------------------------
-  30          ------------------------------------------------------------------------------*/
-  31          void ini_timer(void)
-  32          {
-  33   1      
-  34   1        TMOD=(TMOD & 0xF0) | 0x01;// configuro el reg TMOD sin precalador a 16 bits
-  35   1          
-  36   1        TH0=0X00;               //registro de la parte alta del timer0 de 16 bits                 *           
-  37   1        TL0=0X00;               // registro de la parte baja del timer0
-  38   1        TR0=1;                  // habilita el timer0 reg TCOM bit 4 para interrup
-  39   1      
-  40   1      }
-  41          /*------------------------------------------------------------------------------
-  42          ------------------------------------------------------------------------------*/
-  43          void on_Timer0_Interrup(void)
-  44          {
-  45   1        TF0=0;                  //registro TCON bit 5 bandera de overflow 
-  46   1        ET0=1;                  // enable interrupcion bit 1 del registro IENO
-  47   1        
-  48   1      }
-  49          /*------------------------------------------------------------------------------
-  50          ------------------------------------------------------------------------------*/
-  51          void off_Timer0_Interrup(void)
-  52          {
-  53   1        ET0=0;                  // enable interrupcion bit 1 del registro IENO
-  54   1        
-C51 COMPILER V9.59.0.0   MAIN                                                              09/03/2021 14:20:34 PAGE 2   
+   7          
+   8          /*------------------------------------------------------------------------------
+   9          interrupcion por timer 
+  10          ValTimeOutCom se decrementa cada overflow de la interrupcion
+  11          Timer_wait    Incrementa cada overflow de la interrrupcion
+  12          clock=22.1184mhz
+  13          ciclo de mqn= clock/12 =0.5nseg
+  14          timer= ciclo mqn* reloj = 0.5 x65535 =32
+  15          temporizado=timer* ValTimeOutCom = 32*100=320ms
+  16          ------------------------------------------------------------------------------*/
+  17           timer0_int() interrupt 1 using 2
+  18              {
+  19   1            
+  20   1            ValTimeOutCom--;
+  21   1            if (ValTimeOutCom == 1)
+  22   1            {
+  23   2              Timer_wait++;
+  24   2            }
+  25   1            
+  26   1            Timer_tivo++;
+  27   1            TF0=0;
+  28   1            
+  29   1          }
+  30          /*------------------------------------------------------------------------------
+  31          ------------------------------------------------------------------------------*/
+  32          void ini_timer(void)
+  33          {
+  34   1      
+  35   1        TMOD=(TMOD & 0xF0) | 0x01;// configuro el reg TMOD sin precalador a 16 bits
+  36   1          
+  37   1        TH0=0X00;               //registro de la parte alta del timer0 de 16 bits                 *           
+  38   1        TL0=0X00;               // registro de la parte baja del timer0
+  39   1        TR0=1;                  // habilita el timer0 reg TCOM bit 4 para interrup
+  40   1      
+  41   1      }
+  42          /*------------------------------------------------------------------------------
+  43          ------------------------------------------------------------------------------*/
+  44          void on_Timer0_Interrup(void)
+  45          {
+  46   1        TF0=0;                  //registro TCON bit 5 bandera de overflow 
+  47   1        ET0=1;                  // enable interrupcion bit 1 del registro IENO
+  48   1        
+  49   1      }
+  50          /*------------------------------------------------------------------------------
+  51          ------------------------------------------------------------------------------*/
+  52          void off_Timer0_Interrup(void)
+  53          {
+  54   1        ET0=0;                  // enable interrupcion bit 1 del registro IENO
+C51 COMPILER V9.59.0.0   MAIN                                                              09/06/2021 11:57:56 PAGE 2   
 
-  55   1      }
-  56          /*------------------------------------------------------------------------------
-  57          ------------------------------------------------------------------------------*/
-  58          /*------------------------------------------------------------------------------
-  59          _getkey waits until a character is received from the serial port.  This may not
-  60          be the exact desired operation (for example if the buffer is empty, this
-  61          function hangs waiting for a character to be received).
-  62          ------------------------------------------------------------------------------*/
-  63          char _getkey (void)
-  64          {
-  65   1      int k;
-  66   1      
-  67   1      do
-  68   1        {
-  69   2        k = com_getchar ();
-  70   2        }
-  71   1      while (k == -1);
-  72   1      
-  73   1      return ((unsigned char) k);
-  74   1      }
-  75          
-  76          /*------------------------------------------------------------------------------
-  77          ------------------------------------------------------------------------------*/
-  78          char putchar (char c)
-  79          {
-  80   1      volatile unsigned int i;
-  81   1      
-  82   1      while (com_putchar (c) != 0)
-  83   1        {
-  84   2        for (i=0; i<1000; i++)
-  85   2          {
-  86   3          /*** DO NOTHING ***/
-  87   3          }
-  88   2        }
-  89   1      
-  90   1      return (c);
-  91   1      }
-  92          /*------------------------------------------------------------------------------
-  93          escribir una cadena de datos por pto serie
-  94          ------------------------------------------------------------------------------*/
-  95          void EscribirCadenaSoft_buffer(unsigned char *buffer,unsigned char tamano_cadena)
-  96          {
-  97   1        unsigned char i,d;
-  98   1          for(i=0;i<tamano_cadena;i++)
-  99   1          {
- 100   2            d=putchar(*buffer);
- 101   2            buffer++;
- 102   2          }
- 103   1      }
- 104          
- 105          /*------------------------------------------------------------------------------
- 106          Rutina de las condiciones iniciales del board
- 107          ------------------------------------------------------------------------------*/
- 108          void inicia_board(void)
- 109          {
- 110   1      cond_ini_tibbo();             /* inicia tibbo*/
- 111   1      cond_ini_clock();             /* inicia clock*/
- 112   1      cond_ini_pto();               /*Inicializacion del pto*/
- 113   1      Atascado_GP0_PIN_3 = 0;                   /*prendo el verificador*/
- 114   1      sel_com=1;                    /*seleccionar el pto serie */
- 115   1      lock=0;                       /*barrera off*/ 
- 116   1        
-C51 COMPILER V9.59.0.0   MAIN                                                              09/03/2021 14:20:34 PAGE 3   
+  55   1        
+  56   1      }
+  57          /*------------------------------------------------------------------------------
+  58          ------------------------------------------------------------------------------*/
+  59          /*------------------------------------------------------------------------------
+  60          _getkey waits until a character is received from the serial port.  This may not
+  61          be the exact desired operation (for example if the buffer is empty, this
+  62          function hangs waiting for a character to be received).
+  63          ------------------------------------------------------------------------------*/
+  64          char _getkey (void)
+  65          {
+  66   1      int k;
+  67   1      
+  68   1      do
+  69   1        {
+  70   2        k = com_getchar ();
+  71   2        }
+  72   1      while (k == -1);
+  73   1      
+  74   1      return ((unsigned char) k);
+  75   1      }
+  76          
+  77          /*------------------------------------------------------------------------------
+  78          ------------------------------------------------------------------------------*/
+  79          char putchar (char c)
+  80          {
+  81   1      volatile unsigned int i;
+  82   1      
+  83   1      while (com_putchar (c) != 0)
+  84   1        {
+  85   2        for (i=0; i<1000; i++)
+  86   2          {
+  87   3          /*** DO NOTHING ***/
+  88   3          }
+  89   2        }
+  90   1      
+  91   1      return (c);
+  92   1      }
+  93          /*------------------------------------------------------------------------------
+  94          escribir una cadena de datos por pto serie
+  95          ------------------------------------------------------------------------------*/
+  96          void EscribirCadenaSoft_buffer(unsigned char *buffer,unsigned char tamano_cadena)
+  97          {
+  98   1        unsigned char i,d;
+  99   1          for(i=0;i<tamano_cadena;i++)
+ 100   1          {
+ 101   2            d=putchar(*buffer);
+ 102   2            buffer++;
+ 103   2          }
+ 104   1      }
+ 105          
+ 106          /*------------------------------------------------------------------------------
+ 107          Rutina de las condiciones iniciales del board
+ 108          ------------------------------------------------------------------------------*/
+ 109          void inicia_board(void)
+ 110          {
+ 111   1      cond_ini_tibbo();             /* inicia tibbo*/
+ 112   1      cond_ini_clock();             /* inicia clock*/
+ 113   1      cond_ini_pto();               /*Inicializacion del pto*/
+ 114   1      Atascado_GP0_PIN_3 = 0;                   /*prendo el verificador*/
+ 115   1      sel_com=1;                    /*seleccionar el pto serie */
+ 116   1      lock=0;                       /*barrera off*/ 
+C51 COMPILER V9.59.0.0   MAIN                                                              09/06/2021 11:57:56 PAGE 3   
 
- 117   1      }
- 118          
- 119          /*------------------------------------------------------------------------------
- 120          Rutina que lee la eeprom, los bit de configuracion 
- 121          ------------------------------------------------------------------------------*/
- 122          void variable_inicio()
- 123          {
- 124   1        
+ 117   1        
+ 118   1      }
+ 119          
+ 120          /*------------------------------------------------------------------------------
+ 121          Rutina que lee la eeprom, los bit de configuracion 
+ 122          ------------------------------------------------------------------------------*/
+ 123          void variable_inicio()
+ 124          {
  125   1        
- 126   1        T_GRACIA=rd_eeprom(0xa8,EE_TIEMPO_GRACIA);
- 127   1        SIN_COBRO=rd_eeprom(0xa8,EE_SIN_COBRO);
- 128   1        Debug_Tibbo=rd_eeprom(0xa8,EE_DEBUG);
- 129   1        USE_LPR=rd_eeprom(0xa8,EE_USE_LPR);
- 130   1        Raspberry = rd_eeprom(0xa8,EE_TIPO_PANTALLA);
- 131   1      
- 132   1      //  Debug_Tibbo = 1;
- 133   1        
- 134   1      }
- 135          /*------------------------------------------------------------------------------
- 136          Note that the two function above, _getkey and putchar, replace the library
- 137          functions of the same name.  These functions use the interrupt-driven serial
- 138          I/O routines in SIO.C.
- 139          ------------------------------------------------------------------------------*/
- 140          
+ 126   1        
+ 127   1        T_GRACIA=rd_eeprom(0xa8,EE_TIEMPO_GRACIA);
+ 128   1        SIN_COBRO=rd_eeprom(0xa8,EE_SIN_COBRO);
+ 129   1        Debug_Tibbo=rd_eeprom(0xa8,EE_DEBUG);
+ 130   1        USE_LPR=rd_eeprom(0xa8,EE_USE_LPR);
+ 131   1        Raspberry = rd_eeprom(0xa8,EE_TIPO_PANTALLA);
+ 132   1      
+ 133   1      //  Debug_Tibbo = 1;
+ 134   1        
+ 135   1      }
+ 136          /*------------------------------------------------------------------------------
+ 137          Note that the two function above, _getkey and putchar, replace the library
+ 138          functions of the same name.  These functions use the interrupt-driven serial
+ 139          I/O routines in SIO.C.
+ 140          ------------------------------------------------------------------------------*/
  141          
- 142          void main (void)
- 143          {
- 144   1        
- 145   1        static unsigned char buffer[40];
- 146   1        static unsigned char Estado_Comunicacion_Secuencia_MF=SEQ_INICIO;
- 147   1        unsigned char Length_trama;
- 148   1      
- 149   1        
- 150   1      ini_timer();                                                              /* initialize interrupt timer0 */
- 151   1      on_Timer0_Interrup();                                                     /* habilita el  timer0 */
- 152   1      com_initialize ();                                                        /* initialize pto serie */
- 153   1      com_baudrate ();                                                          /* setup for 9600 baud */
- 154   1      inicia_board();                                                           /*Rutina de las condiciones iniciales del board*/
- 155   1      EA = 1;                                                                   /* Enable Interrupts global*/
- 156   1      
- 157   1      time_bit();                                                               /*solo para pruebas*/
- 158   1      Delay_20us(33);
- 159   1      time_mbit();
- 160   1      
- 161   1      tx_aux('a');  
- 162   1      led_err_imp =1;
- 163   1      sel_Funcion();                                                              /*el pulsador funcion es el cmd q da la entrada a programacio
+ 142          
+ 143          void main (void)
+ 144          {
+ 145   1        
+ 146   1        static unsigned char buffer[40];
+ 147   1        static unsigned char Estado_Comunicacion_Secuencia_MF=SEQ_INICIO;
+ 148   1        unsigned char Length_trama;
+ 149   1      
+ 150   1        
+ 151   1      ini_timer();                                                              /* initialize interrupt timer0 */
+ 152   1      on_Timer0_Interrup();                                                     /* habilita el  timer0 */
+ 153   1      com_initialize ();                                                        /* initialize pto serie */
+ 154   1      com_baudrate ();                                                          /* setup for 9600 baud */
+ 155   1      inicia_board();                                                           /*Rutina de las condiciones iniciales del board*/
+ 156   1      EA = 1;                                                                   /* Enable Interrupts global*/
+ 157   1      
+ 158   1      time_bit();                                                               /*solo para pruebas*/
+ 159   1      Delay_20us(33);
+ 160   1      time_mbit();
+ 161   1      
+ 162   1      tx_aux('a');  
+ 163   1      led_err_imp =1;
+ 164   1      sel_Funcion();                                                              /*el pulsador funcion es el cmd q da la entrada a programacio
              -n */
- 164   1        
- 165   1        if (DataIn==0)              
- 166   1        {
- 167   2        menu();                                                                   /*menu de configuracion*/
- 168   2        }
- 169   1      
+ 165   1      
+ 166   1        if (DataIn==0)              
+ 167   1        {
+ 168   2        menu();                                                                   /*menu de configuracion*/
+ 169   2        }
  170   1      
- 171   1        variable_inicio();                                                        /*leo y cargo  las variables de inicio de configuracion*/
- 172   1      while(Secuencia_inicio_expedidor());                                        /* procedimiento de inicio de transporte (reset, y
+ 171   1      
+ 172   1        variable_inicio();                                                        /*leo y cargo  las variables de inicio de configuracion*/
+ 173   1      while(Secuencia_inicio_expedidor());                                        /* procedimiento de inicio de transporte (reset, y
              - grabar eeprom)*/
- 173   1        ValTimeOutCom=TIME_CARD;
- 174   1                                                    
- 175   1        while (1)                                                                 /* Loop Principal               */  
- 176   1        {   
-C51 COMPILER V9.59.0.0   MAIN                                                              09/03/2021 14:20:34 PAGE 4   
+ 174   1        ValTimeOutCom=TIME_CARD;
+ 175   1                                                    
+ 176   1        while (1)                                                                 /* Loop Principal               */  
+C51 COMPILER V9.59.0.0   MAIN                                                              09/06/2021 11:57:56 PAGE 4   
 
- 177   2            
- 178   2              if (rx_ip==0)                                                         /*pregunto si llega datos de monitor pto serie emulado*/
- 179   2              {
- 180   3                 Rx_Monitor();
- 181   3              }
- 182   2          
- 183   2            
- 184   2                
- 185   2              Estado_Comunicacion_Secuencia_MF=SecuenciaExpedidorMF(Estado_Comunicacion_Secuencia_MF);          //Secuenc
+ 177   1        {   
+ 178   2            
+ 179   2              if (rx_ip==0)                                                         /*pregunto si llega datos de monitor pto serie emulado*/
+ 180   2              {
+ 181   3                 Rx_Monitor();
+ 182   3              }
+ 183   2          
+ 184   2            
+ 185   2                
+ 186   2              Estado_Comunicacion_Secuencia_MF=SecuenciaExpedidorMF(Estado_Comunicacion_Secuencia_MF);          //Secuenc
              -iaExpedidor();
- 186   2              
- 187   2                  
- 188   2                                                          
- 189   2            
- 190   2              if ((busy == 0) && (pto_paraleo == 0))                              /*comunicacion con el pto paralelo*/
- 191   2              {
- 192   3            
- 193   3              Length_trama=recibe_port(buffer);                                   /*recibe informacion del pto paralelo*/
- 194   3              
- 195   3                  /*solo de prueba*/    
- 196   3              Debug_pto_paralelo(buffer,Length_trama);        
- 197   3              Valida_Trama_Pto(buffer,Length_trama);                                /*valido la informacion recibida */
- 198   3              
- 199   3                  
- 200   3              
- 201   3               
- 202   3              }
- 203   2          msj_lcd_informativo();                                                  /*muestra la informacion de  ID cliente, cod parque, fech
+ 187   2              
+ 188   2                  
+ 189   2                                                          
+ 190   2            
+ 191   2              if ((busy == 0) && (pto_paraleo == 0))                              /*comunicacion con el pto paralelo*/
+ 192   2              {
+ 193   3            
+ 194   3              Length_trama=recibe_port(buffer);                                   /*recibe informacion del pto paralelo*/
+ 195   3              
+ 196   3                  /*solo de prueba*/    
+ 197   3              Debug_pto_paralelo(buffer,Length_trama);        
+ 198   3              Valida_Trama_Pto(buffer,Length_trama);                                /*valido la informacion recibida */
+ 199   3              
+ 200   3                  
+ 201   3              
+ 202   3               
+ 203   3              }
+ 204   2          msj_lcd_informativo();                                                  /*muestra la informacion de  ID cliente, cod parque, fech
              -a,comparacion*/
- 204   2        
- 205   2      
- 206   2          }
- 207   1      }
- 208          
+ 205   2        
+ 206   2      
+ 207   2          }
+ 208   1      }
  209          
  210          
- 211          /*------------------------------------------------------------------------------
- 212          ------------------------------------------------------------------------------*/
- 213          
+ 211          
+ 212          /*------------------------------------------------------------------------------
+ 213          ------------------------------------------------------------------------------*/
+ 214          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE

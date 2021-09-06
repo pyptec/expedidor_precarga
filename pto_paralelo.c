@@ -16,6 +16,7 @@ extern void Debug_Dividir_texto();
 extern void Block_read_Clock_Hex(unsigned char *datos_clock);
 extern unsigned char rd_eeprom (unsigned char control,unsigned int Dir); 
 extern void Debug_chr_Tibbo(unsigned char Dat);
+extern void confirmacion();
 
 /*pines del pto paralelo*/
 sbit port_clk = P3^4;				//Recepcion AUX											*
@@ -232,6 +233,7 @@ void cond_ini_pto()
 	ready=1;
 	rx_in_data=1;
 	P2=0xff;
+	confirmacion();
 }
 /*------------------------------------------------------------------------------
 Funcion q carga el reloj y lo envia por el pto paralelo

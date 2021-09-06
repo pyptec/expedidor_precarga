@@ -327,21 +327,17 @@
           <WinNumber>1</WinNumber>
           <ItemText>Buffer_Rta_lintech</ItemText>
         </Ww>
+        <Ww>
+          <count>37</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>hora</ItemText>
+        </Ww>
+        <Ww>
+          <count>38</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>temp</ItemText>
+        </Ww>
       </WatchWindow1>
-      <PerformanceAnalyzer>
-        <Li>
-          <IntNumber>0</IntNumber>
-          <ItemText>\\expedidor_v_01_raspberry\TIBBO\time_mbit</ItemText>
-        </Li>
-        <Li>
-          <IntNumber>1</IntNumber>
-          <ItemText>\\expedidor_v_01_raspberry\TIBBO\time_bit</ItemText>
-        </Li>
-        <Li>
-          <IntNumber>2</IntNumber>
-          <ItemText>\\expedidor_v_01_raspberry\TIBBO\tx_aux</ItemText>
-        </Li>
-      </PerformanceAnalyzer>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>

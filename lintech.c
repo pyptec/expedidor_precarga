@@ -371,9 +371,9 @@ CMD q programa la clave en el verificador o transporte
 		EscribirCadenaSoft_buffer(g_scArrTxComSoft,20);		/* envio la trama por el pto serie*/
 		ValTimeOutCom=TIME_CARD;
 }
-/*
-	void Dwload_EEprom_prog(unsigned char *password)
-	{
+
+void Dwload_EEprom_prog(unsigned char *password)
+{
 		unsigned char j, bcc;
 	unsigned char	g_scArrTxComSoft[21];
 	bcc=0;
@@ -409,7 +409,7 @@ CMD q programa la clave en el verificador o transporte
 	//	DebugBufferMF(g_scArrTxComSoft,20,0);								/*muestra la trama enviada al pto serie a debug por tibbo*/
 	//	EscribirCadenaSoft_buffer(g_scArrTxComSoft,20);		/* envio la trama por el pto serie*/
 	//	ValTimeOutCom=TIME_CARD;
-	//}*/
+}
 /*------------------------------------------------------------------------------
 Funcion q verifica si la clave y la carga en el transporte
 ------------------------------------------------------------------------------*/

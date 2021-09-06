@@ -4,6 +4,7 @@ MAIN.C:  sistema verificador
 Diseñado Ing. Jaime Pedraza
 ------------------------------------------------------------------------------*/
 #include <main.h>
+
 /*------------------------------------------------------------------------------
 interrupcion por timer 
 ValTimeOutCom se decrementa cada overflow de la interrupcion
@@ -161,7 +162,7 @@ time_mbit();
 tx_aux('a');	
 led_err_imp =1;
 sel_Funcion();																															/*el pulsador funcion es el cmd q da la entrada a programacion */
-	
+
 	if (DataIn==0)							
 	{
 	menu();																																		/*menu de configuracion*/

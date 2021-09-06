@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 1   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE LINTECH
@@ -62,7 +62,7 @@ line level    source
   52          extern void EscribirCadenaSoft_buffer(unsigned char *buffer,unsigned char tamano_cadena);
   53          extern void Debug_chr_Tibbo(unsigned char Dat);
   54          extern unsigned char Dir_board();
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 2   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 2   
 
   55          
   56          /*atributos */
@@ -126,7 +126,7 @@ line level    source
  114   1      
  115   1        if (Detalle == SENSOR_NORMAL)
  116   1          {
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 3   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 3   
 
  117   2            Debug_txt_Tibbo((unsigned char *) "Check_Status SENSOR_NORMAL\r\n");
  118   2          }
@@ -190,7 +190,7 @@ line level    source
  176   1        g_scArrTxComSoft[4]='C';
  177   1        g_scArrTxComSoft[5]='3';
  178   1      
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 4   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 4   
 
  179   1        g_scArrTxComSoft[7]=ETX;
  180   1        for (j=0; j<8; j++)
@@ -254,7 +254,7 @@ line level    source
  237   2          g_scArrTxComSoft[5]='2';
  238   2          g_scArrTxComSoft[6]=Posicion;
  239   2          g_scArrTxComSoft[7]=ETX;
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 5   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 5   
 
  240   2          for (j=0; j<8; j++)
  241   2          {
@@ -318,7 +318,7 @@ line level    source
  299   1        g_scArrTxComSoft[4]='C';
  300   1        g_scArrTxComSoft[5]=0x60;
  301   1        g_scArrTxComSoft[6]='3';
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 6   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 6   
 
  302   1        g_scArrTxComSoft[7]=0x00;
  303   1        g_scArrTxComSoft[8]=0x20;
@@ -382,7 +382,7 @@ line level    source
  361   1        g_scArrTxComSoft[18]=ETX;
  362   1        
  363   1        for (j=0; j<19; j++)
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 7   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 7   
 
  364   1          {
  365   2            bcc=g_scArrTxComSoft[j]^bcc;
@@ -394,46 +394,46 @@ line level    source
  371   1          EscribirCadenaSoft_buffer(g_scArrTxComSoft,20);   /* envio la trama por el pto serie*/
  372   1          ValTimeOutCom=TIME_CARD;
  373   1      }
- 374          /*
- 375            void Dwload_EEprom_prog(unsigned char *password)
- 376            {
- 377              unsigned char j, bcc;
- 378            unsigned char g_scArrTxComSoft[21];
- 379            bcc=0;
- 380            Debug_txt_Tibbo((unsigned char *) "Download MF EEprom\r\n");
- 381            
- 382            g_scArrTxComSoft[0]=0xF2;
- 383            g_scArrTxComSoft[1]=0X00;
- 384            g_scArrTxComSoft[2]=0X00;
- 385            g_scArrTxComSoft[3]=0X0E;
- 386            g_scArrTxComSoft[4]='C';
- 387            g_scArrTxComSoft[5]=0x60;
- 388            g_scArrTxComSoft[6]='3';
- 389            g_scArrTxComSoft[7]=0x00;
- 390            g_scArrTxComSoft[8]=0Xd0;
- 391            g_scArrTxComSoft[9]=0X00;
- 392            g_scArrTxComSoft[10]=0X01;
- 393            g_scArrTxComSoft[11]=0x06;
- 394            g_scArrTxComSoft[12]=*password; //33
- 395            g_scArrTxComSoft[13]=*(password+1);//56
- 396            g_scArrTxComSoft[14]=*(password+2);//30
- 397            g_scArrTxComSoft[15]=*(password+3);//70
- 398            g_scArrTxComSoft[16]=*(password+4);//34
- 399            g_scArrTxComSoft[17]=*(password+5);//72
- 400            g_scArrTxComSoft[18]=ETX;
- 401            
- 402            for (j=0; j<19; j++)
- 403              {
- 404                bcc=g_scArrTxComSoft[j]^bcc;
- 405              }
- 406              g_scArrTxComSoft[19]=bcc;
- 407              buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
- 408            //  g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
- 409            //  DebugBufferMF(g_scArrTxComSoft,20,0);               /*muestra la trama enviada al pto serie a debug por tibbo
+ 374          
+ 375          void Dwload_EEprom_prog(unsigned char *password)
+ 376          {
+ 377   1          unsigned char j, bcc;
+ 378   1        unsigned char g_scArrTxComSoft[21];
+ 379   1        bcc=0;
+ 380   1        Debug_txt_Tibbo((unsigned char *) "Download MF EEprom\r\n");
+ 381   1        
+ 382   1        g_scArrTxComSoft[0]=0xF2;
+ 383   1        g_scArrTxComSoft[1]=0X00;
+ 384   1        g_scArrTxComSoft[2]=0X00;
+ 385   1        g_scArrTxComSoft[3]=0X0E;
+ 386   1        g_scArrTxComSoft[4]='C';
+ 387   1        g_scArrTxComSoft[5]=0x60;
+ 388   1        g_scArrTxComSoft[6]='3';
+ 389   1        g_scArrTxComSoft[7]=0x00;
+ 390   1        g_scArrTxComSoft[8]=0Xd0;
+ 391   1        g_scArrTxComSoft[9]=0X00;
+ 392   1        g_scArrTxComSoft[10]=0X01;
+ 393   1        g_scArrTxComSoft[11]=0x06;
+ 394   1        g_scArrTxComSoft[12]=*password; //33
+ 395   1        g_scArrTxComSoft[13]=*(password+1);//56
+ 396   1        g_scArrTxComSoft[14]=*(password+2);//30
+ 397   1        g_scArrTxComSoft[15]=*(password+3);//70
+ 398   1        g_scArrTxComSoft[16]=*(password+4);//34
+ 399   1        g_scArrTxComSoft[17]=*(password+5);//72
+ 400   1        g_scArrTxComSoft[18]=ETX;
+ 401   1        
+ 402   1        for (j=0; j<19; j++)
+ 403   1          {
+ 404   2            bcc=g_scArrTxComSoft[j]^bcc;
+ 405   2          }
+ 406   1          g_scArrTxComSoft[19]=bcc;
+ 407   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
+ 408   1        //  g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
+ 409   1        //  DebugBufferMF(g_scArrTxComSoft,20,0);               /*muestra la trama enviada al pto serie a debug por tibbo
              -*/
- 410            //  EscribirCadenaSoft_buffer(g_scArrTxComSoft,20);   /* envio la trama por el pto serie*/
- 411            //  ValTimeOutCom=TIME_CARD;
- 412            //}*/
+ 410   1        //  EscribirCadenaSoft_buffer(g_scArrTxComSoft,20);   /* envio la trama por el pto serie*/
+ 411   1        //  ValTimeOutCom=TIME_CARD;
+ 412   1      }
  413          /*------------------------------------------------------------------------------
  414          Funcion q verifica si la clave y la carga en el transporte
  415          ------------------------------------------------------------------------------*/
@@ -446,7 +446,7 @@ line level    source
  422   1        Debug_txt_Tibbo((unsigned char *) "Carga y Verifica de EEprom\r\n");
  423   1      
  424   1      
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 8   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 8   
 
  425   1        g_scArrTxComSoft[0]=0xF2;
  426   1        g_scArrTxComSoft[1]=0X00;
@@ -510,7 +510,7 @@ line level    source
  484   1        g_scArrTxComSoft[11]=0x01;
  485   1        g_scArrTxComSoft[12]=ETX;
  486   1      
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 9   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 9   
 
  487   1        for (j=0; j<13; j++)
  488   1        {
@@ -574,7 +574,7 @@ line level    source
  546   1        g_scArrTxComSoft[29]=bcc;
  547   1      
  548   1        
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 10  
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 10  
 
  549   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
  550   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
@@ -638,7 +638,7 @@ line level    source
  608   2          }
  609   1          g_scArrTxComSoft[8]=bcc;
  610   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/03/2021 14:20:36 PAGE 11  
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/06/2021 11:57:57 PAGE 11  
 
  611   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
  612   1          DebugBufferMF(g_scArrTxComSoft,9,0);                /*muestra la trama enviada al pto serie a debug por tibbo*/
@@ -650,9 +650,9 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   1993    ----
+   CODE SIZE        =   2178    ----
    CONSTANT SIZE    =    419    ----
-   XDATA SIZE       =   ----     193
+   XDATA SIZE       =   ----     218
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----

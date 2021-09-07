@@ -57,7 +57,7 @@ void time_mbit(void)
 	unsigned char j;
 	//unsigned char j;
 
-	for (j=0; j<=5; j++) 				//18 para 19200  ...   41 Para 9600
+	for (j=0; j<=6; j++) 				//5 18 para 19200  ...   41 Para 9600
 	{
 //	for (j=0; j<=4; j++)
 	//{

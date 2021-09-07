@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 1   
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE PROG
@@ -62,7 +62,7 @@ line level    source
   52          #define EE_HORARIO_2            0x0032
   53          #define EE_HORARIO_3            0x004b
   54          #define EE_HORARIO_4            0x0064
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 2   
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 2   
 
   55          #define EE_HORARIO_5            0x007d
   56          #define EE_HORARIO_6            0x0096
@@ -126,7 +126,7 @@ line level    source
  111            "11",     // prog horario
  112            "12",     // Validar tipo de vehiculo mensual
  113            "13",     // habilita apb para mensual
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 3   
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 3   
 
  114            "14",     // configura mensuales
  115            "15",     // ver comandos programados
@@ -190,7 +190,7 @@ line level    source
  171   3            }
  172   2            if ((temp>=91)&&(temp<=96))
  173   2            {
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 4   
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 4   
 
  174   3            temp=temp +7 ;
  175   3            }
@@ -254,7 +254,7 @@ line level    source
  233   1      }
  234          
  235          /*------------------------------------------------------------------------------
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 5   
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 5   
 
  236          Rutina de 
  237          ------------------------------------------------------------------------------*/
@@ -318,7 +318,7 @@ line level    source
  295            do {
  296              *res=rd_eeprom(0xa8,addres);
  297              i=*res;
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 6   
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 6   
 
  298              addres++;
  299              res++;
@@ -382,7 +382,7 @@ line level    source
  353   1        unsigned char buffer[10];
  354   1        unsigned int dataee;
  355   1        
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 7   
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 7   
 
  356   1        dataee=rd_eeprom(0xa8,EE_TIEMPO_GRACIA);                                          /*se lee el id_cliente actual */
  357   1        sprintf(buffer,"%d",dataee);                                                  /*se convierte  un entero a un string*/
@@ -446,7 +446,7 @@ line level    source
  411   1        else 
  412   1        {
  413   2            printf("\r\n\n ACTUAL SIN_COBRO GRATIS Y SALIDA EL MISMO DIA=%s\r\n\n",buffer);   
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 8   
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 8   
 
  414   2        }
  415   1        
@@ -510,7 +510,7 @@ line level    source
  470   2        }
  471   1        else
  472   1        {
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 9   
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 9   
 
  473   2          printf("\r\n\n ACTUAL USE_LPR HABILITADO=%s\r\n\n",buffer);     
  474   2        }
@@ -574,7 +574,7 @@ line level    source
  529   2        }
  530   1        
  531   1      }
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 10  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 10  
 
  532          void Prog_tarjeta_automatica_o_boton()
  533          {
@@ -638,7 +638,7 @@ line level    source
  588   1        sprintf(buffer,"%d",dataee);  
  589   1        if(dataee==0)
  590   1        {
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 11  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 11  
 
  591   2          printf("\r\n\n ACTUAL ANTIPASSBACK INHABILITADO=%s\r\n\n",buffer);                            /*se muestra el id_clien
              -te actual en pantalla*/
@@ -702,7 +702,7 @@ line level    source
  646   2        }
  647   1        
  648   1        printf("\r\n\n DIGITE LA NUEVA ADDRESS_HIGH_BOARD=");                                 /*digite el nuevo id_cliente*/
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 12  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 12  
 
  649   1        IngresaDato(buffer,0);                                                        /*trae el dato digitado*/
  650   1        dataee=atoi(buffer);                                                          /*lo convierto a un dato hex*/
@@ -766,7 +766,7 @@ line level    source
  706   2          printf("\r\n\n ACTUAL HORARIO INHABILITADO=%s\r\n\n",buffer);                           /*se muestra el id_cliente ac
              -tual en pantalla*/
  707   2        }
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 13  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 13  
 
  708   1        else
  709   1        {
@@ -830,7 +830,7 @@ line level    source
  767   1        dataee = rd_eeprom(0xa8,addr +  Minutos_Low_addr_Desde);
  768   1        printf("%c   ",dataee); 
  769   1          /*hasta*/
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 14  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 14  
 
  770   1        dataee = rd_eeprom(0xa8,addr + Hora_High_addr_Hasta);
  771   1        printf("%c",dataee);
@@ -894,7 +894,7 @@ line level    source
  829   3          }
  830   2          
  831   2          if ((temp=buffer[j]) == Viernes_dato)
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 15  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 15  
 
  832   2          { 
  833   3            printf(" Viernes");
@@ -958,7 +958,7 @@ line level    source
  891   2          }
  892   1          /*Jueves*/
  893   1            dataee=rd_eeprom(0xa8,addr+Jueves_addr);  
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 16  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 16  
 
  894   1          if(dataee == Jueves_dato)
  895   1          {
@@ -1022,7 +1022,7 @@ line level    source
  953   1        /*mi direccion eeprom*/
  954   1        
  955   1        addr= ee_addr_horario[j];
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 17  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 17  
 
  956   1        temp= addr;
  957   1        
@@ -1086,7 +1086,7 @@ line level    source
 1013   1        printf("\r\n\n DIGITE EL NUEVO ESTADO DE TIPO_VEHICULO MENSUAL=");                                  /*digite el nuevo id_c
              -liente*/
 1014   1        IngresaDato(buffer,0);                                                        /*trae el dato digitado*/
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 18  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 18  
 
 1015   1        dataee=atoi(buffer);                                                          /*lo convierto a un dato hex*/
 1016   1        wr_eeprom(0xa8,EE_VALIDA_TIPO_VEHICULO_MENSUAL,dataee);                                         /*grabo el dato en la eeprom*
@@ -1150,7 +1150,7 @@ line level    source
 1069   1        unsigned int dataee;
 1070   1      
 1071   1        LeerMemoria(EE_FECHA_VENCIMIENTO,buffer);   
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 19  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 19  
 
 1072   1           hex_ascii(buffer,fecha);
 1073   1                                    
@@ -1214,7 +1214,7 @@ line level    source
 1130   1        unsigned char conta;
 1131   1        
 1132   1        unsigned int addr,temp;
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 20  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 20  
 
 1133   1        unsigned char dataee;
 1134   1        /*direcciones de memoria de almacenamiento*/
@@ -1278,7 +1278,7 @@ line level    source
 1191   1        {
 1192   2          printf("\r\n\n ACTUAL MENSUAL POR BOCA INHABILITADO=%s\r\n\n",buffer);                            /*se muestra el id_c
              -liente actual en pantalla*/
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 21  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 21  
 
 1193   2        }
 1194   1        else
@@ -1342,7 +1342,7 @@ line level    source
 1251   1        else
 1252   1        {
 1253   2          printf("\r\n USE_LPR = ON\r\n");      
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 22  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 22  
 
 1254   2        }
 1255   1        /*Tipo de pantalla*/
@@ -1406,7 +1406,7 @@ line level    source
              - */
 1311   1        sprintf(buffer,"%d",dataee);                                                  /*se convierte  un entero a un string*/
 1312   1        if(dataee==0)
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 23  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 23  
 
 1313   1        {
 1314   2          printf("\r\n TIPO_VEHICULO MENSUAL = OFF\r\n");                           /*se muestra el id_cliente actual en pantal
@@ -1470,7 +1470,7 @@ line level    source
 1369   1         printf("\r\n ANTIPASSBACK       --- CMD 8 Habilitar = 1, Inhabilitar = 0");
 1370   1         printf("\r\n PLACA              --- CMD 9 Habilitar = 1, Inhabilitar = 0");
 1371   1         printf("\r\n ADDRESS_HIGH_BOARD --- CMD 10 La direccion alta del board del numero 5 al 9 sino se usa deb
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 24  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 24  
 
              -e ir en 0");
 1372   1         printf("\r\n HORARIO            --- CMD 11 Progama 10 horarios del 1 al 10");
@@ -1534,7 +1534,7 @@ line level    source
 1430   2        buffer[10]=0;
 1431   2        printf("%s", buffer);
 1432   2        strcpy (validacion,hash_id(buffer));
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 25  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 25  
 
 1433   2        printf("\r\n\n/>Password:");
 1434   2        
@@ -1598,7 +1598,7 @@ line level    source
 1492   4                  
 1493   4                  case 1:  //Tiempo de recolecion entre muestra
 1494   4                    prog_cod_park();
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 26  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 26  
 
 1495   4                  break;
 1496   4                  case 2:  //Informacion recolectada enviada al rs232
@@ -1662,7 +1662,7 @@ line level    source
 1554   3            }
 1555   2        }
 1556   1      }
-C51 COMPILER V9.59.0.0   PROG                                                              09/06/2021 11:57:57 PAGE 27  
+C51 COMPILER V9.59.0.0   PROG                                                              09/07/2021 11:24:21 PAGE 27  
 
 1557          
 1558            

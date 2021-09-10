@@ -1473,9 +1473,12 @@ unsigned char Respuesta_Placa_Cancel()
 {
 	unsigned char Estado_expedidor;
 	
+	
 	Debug_txt_Tibbo((unsigned char *) "RESPUESTA PLACA O CANCEL = ");	
 	Debug_txt_Tibbo((unsigned char *) placa);
 	Debug_txt_Tibbo((unsigned char *) "\r\n");
+	
+	
 		
 	if (strcmp(placa,"NO_PLATE")== 0)
 	{

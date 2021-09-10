@@ -134,6 +134,11 @@ unsigned char recibe_cmd_Monitor(unsigned char *buffer_cmd)
 							}
 						}
 					}
+					else if (*buffer_cmd == 0x06 )
+					{
+						/*llego el ask*/
+						*buffer_cmd=0;
+					}
 					else
 					{
 						/*no es 0x02 inicio de trama */

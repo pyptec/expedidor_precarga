@@ -1472,39 +1472,21 @@ unsigned char  Respuesta_Segunda_clave(unsigned char *Atributos_Expedidor,unsign
 unsigned char Respuesta_Placa_Cancel()
 {
 	unsigned char Estado_expedidor;
-	unsigned char *Cancel="CANCEL";
+	
 	Debug_txt_Tibbo((unsigned char *) "RESPUESTA PLACA O CANCEL = ");	
 	Debug_txt_Tibbo((unsigned char *) placa);
 	Debug_txt_Tibbo((unsigned char *) "\r\n");
-	
-	//if(strcmp(placa,Cancel)== 0)
-	//{
-	//	*(Atributos_Expedidor + Sector) = Sector_1;
-	//	*(Atributos_Expedidor + Bloque) = Bloque_1;
-	//	Armar_Trama_Tarjeta_Sector1_Bloque1_Camcel(Buffer_Write_MF);
-	//	Estado_expedidor = SEQ_WRITE_SECTOR_BLOQUE;
-	//}
+		
 	if (strcmp(placa,"NO_PLATE")== 0)
-	{
-	  Debug_txt_rs232(placa);
-		Estado_expedidor = SEQ_CLASE_TARJETAS;//SEQ_SECOND_PASSWORD;
-	}
-	else if (strcmp(placa,"unknown")== 0)
 	{
 	  Debug_txt_rs232(placa);
 		Estado_expedidor = SEQ_CLASE_TARJETAS;//SEQ_SECOND_PASSWORD;
 	}
 	else
 	{
-		//if(MenSual ==  True)
-		//{
-		//	Estado_expedidor = SEQ_FRONT_CARD;	
-		//}
-		//else
-		//{
-			
+		
 			Estado_expedidor = SEQ_CLASE_TARJETAS; //SEQ_SECOND_PASSWORD;
-		//} 		
+		
 	}	
 	return Estado_expedidor;
 }
@@ -1792,6 +1774,7 @@ void Armar_Trama_Placa(unsigned char *Buffer_Write_MF)
 		{
 		*(Buffer_Write_MF +j)=placa[j];
 		}
+		/*lleno de ceros*/
 			for (j=len_placa; j<16; j++)	 					
 		{
 			*(Buffer_Write_MF +j)=0x00;
@@ -1961,7 +1944,6 @@ unsigned char Wait_Placa()
 		if(placa_ready!=False || led_err_imp==0)
 			{
 				/*llego placa*/
-				/// Debug_Buffer_rs232_lcd("ok",2);
 				Estado_expedidor = Respuesta_Placa_Cancel();
 			}
 			else

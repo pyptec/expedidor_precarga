@@ -44,22 +44,15 @@ extern void Debug_Buffer_rs232_lcd(unsigned char *str,unsigned char num_char);
 
 #define EE_USE_LPR							0x000A
 /*------------------------------------------------------------------------------
-Rutina q recibe  los cmd de Monitor por el tibbo
-return el num de caracteres recibidos
-y almacena la trama en un apuntador
+el tiempo de espera por caracter recibido 
+rx_ip --> pin de recepcion de datos 
+time_out ----> bit de tiempo vencido
+contador ----> tiempo de espera del caracter
 ------------------------------------------------------------------------------*/
-unsigned char recibe_cmd_Monitor(unsigned char *buffer_cmd)
+unsigned Timer_monitor_char()
 {
-	unsigned char j, NumDatos,time_out,MaxChrRx;
-	unsigned int contador;
-	
-		NumDatos=0;
-		MaxChrRx=12;
-		placa[0]=0x0;
-	//if (USE_LPR==1)
-	//{
-			for (j=0; j<MaxChrRx; j++)
-			{
+unsigned char time_out;
+unsigned int contador;		
 				contador=0;
 				time_out=0;
 				while ((rx_ip==1)&&(time_out==0))
@@ -68,25 +61,90 @@ unsigned char recibe_cmd_Monitor(unsigned char *buffer_cmd)
 					if (contador>60000)
 					{
 						time_out=1;
-						j=MaxChrRx;
 					}				
 				}
-				if(time_out==1)break;
-					NumDatos++;
+				if(time_out==1)
+				{ 
+					return False;
 					
-	 				*buffer_cmd=rx_Data();
-					if (*buffer_cmd != 06)
+				}
+				else
+				{
+				return True;
+				}
+		
+}
+/*------------------------------------------------------------------------------
+Rutina q recibe  los cmd de Monitor por el tibbo
+return el num de caracteres recibidos
+y almacena la trama en un apuntador
+la trama de placa inicia 0x02<xxxxxx>0x03
+02 41 03 cuando no hay placa
+06 ask el aceptado
+------------------------------------------------------------------------------*/
+
+unsigned char recibe_cmd_Monitor(unsigned char *buffer_cmd)
+{
+	unsigned char j, NumDatos,MaxChrRx;
+	
+	
+		NumDatos=0;
+		MaxChrRx=12;
+		placa[0]=0x0;
+	//if (USE_LPR==1)
+	//{
+/*timer que espera el dato de monitor*/
+				if (Timer_monitor_char() == False)
+				{
+					NumDatos= 0;
+				}
+				else
+				{
+				*buffer_cmd=rx_Data();
+				
+					/*valido el inicio del cmd*/
+					if (*buffer_cmd == 0x02 )
 					{
+						NumDatos++;
 						buffer_cmd++;
+						
+						for (j=1; j<MaxChrRx; j++)
+						{
+							if (Timer_monitor_char() == False)
+							{
+								break;
+							}
+							else 
+							{
+								*buffer_cmd=rx_Data();
+								if (*buffer_cmd==ETX)
+								{
+									j=MaxChrRx;
+									NumDatos++;
+									buffer_cmd++;
+									buffer_cmd=0;
+									
+								}
+								else
+								{
+									NumDatos++;
+									buffer_cmd++;
+								}
+								
+							}
+						}
 					}
-			}
+					else
+					{
+						/*no es 0x02 inicio de trama */
+						NumDatos= 0;
+						
+					}
+				
+				}
+				return NumDatos;
+}
 
-			*buffer_cmd=0;
-			
-
-	//}
-	return	NumDatos;
-}	
 /*------------------------------------------------------------------------------
 Rutina q valida los cmd de Monitor
 ------------------------------------------------------------------------------*/

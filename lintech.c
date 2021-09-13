@@ -405,10 +405,10 @@ void Dwload_EEprom_prog(unsigned char *password)
 		}
 		g_scArrTxComSoft[19]=bcc;
 		buffer_ready=0;																		/* buffer del pto serie (0) inicia a esperar la trama*/
-	//	g_cEstadoComSoft=ESPERA_RX;												/* Espera el ASK en el pt o serie para empesar a almacenas*/
+		g_cEstadoComSoft=ESPERA_RX;												/* Espera el ASK en el pt o serie para empesar a almacenas*/
 	//	DebugBufferMF(g_scArrTxComSoft,20,0);								/*muestra la trama enviada al pto serie a debug por tibbo*/
-	//	EscribirCadenaSoft_buffer(g_scArrTxComSoft,20);		/* envio la trama por el pto serie*/
-	//	ValTimeOutCom=TIME_CARD;
+		EscribirCadenaSoft_buffer(g_scArrTxComSoft,20);		/* envio la trama por el pto serie*/
+		ValTimeOutCom=TIME_CARD;
 }
 /*------------------------------------------------------------------------------
 Funcion q verifica si la clave y la carga en el transporte
@@ -560,7 +560,7 @@ void WR_MF(unsigned char Sector, unsigned char Bloque,unsigned char *buffer)
 void Unique_Identifier_UID(void)
 {
 unsigned char j, bcc;
-unsigned char	g_scArrTxComSoft[10];
+unsigned char	g_scArrTxComSoft[11];
 		  bcc=0;
 	
 	Debug_txt_Tibbo((unsigned char *) "UID\r\n");

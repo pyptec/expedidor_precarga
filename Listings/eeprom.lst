@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   EEPROM                                                            09/10/2021 16:23:09 PAGE 1   
+C51 COMPILER V9.59.0.0   EEPROM                                                            09/13/2021 10:22:09 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE EEPROM
@@ -62,7 +62,7 @@ line level    source
   52   3          scl=0;
   53   3      
   54   3          break;
-C51 COMPILER V9.59.0.0   EEPROM                                                            09/10/2021 16:23:09 PAGE 2   
+C51 COMPILER V9.59.0.0   EEPROM                                                            09/13/2021 10:22:09 PAGE 2   
 
   55   3          }
   56   2        }
@@ -126,7 +126,7 @@ line level    source
  114   1        sda=0;
  115   1        scl=0;
  116   1        return;
-C51 COMPILER V9.59.0.0   EEPROM                                                            09/10/2021 16:23:09 PAGE 3   
+C51 COMPILER V9.59.0.0   EEPROM                                                            09/13/2021 10:22:09 PAGE 3   
 
  117   1      }
  118          //*******************************************************************************************
@@ -190,7 +190,7 @@ line level    source
  176   1        e_d_m(dir_h);
  177   1        ackd();
  178   1        e_d_m(dir_l);
-C51 COMPILER V9.59.0.0   EEPROM                                                            09/10/2021 16:23:09 PAGE 4   
+C51 COMPILER V9.59.0.0   EEPROM                                                            09/13/2021 10:22:09 PAGE 4   
 
  179   1        ackd();
  180   1        e_d_m(data_eeprom);
@@ -254,7 +254,7 @@ line level    source
  237   1        start();
  238   1        e_d_m(control);
  239   1        ack_lect();
-C51 COMPILER V9.59.0.0   EEPROM                                                            09/10/2021 16:23:09 PAGE 5   
+C51 COMPILER V9.59.0.0   EEPROM                                                            09/13/2021 10:22:09 PAGE 5   
 
  240   1        e_d_m(dir_h);
  241   1          ack_lect();
@@ -318,7 +318,7 @@ line level    source
  299   1      }
  300          void Write_EEprom_Ticket(unsigned char *buffer)
  301          {
-C51 COMPILER V9.59.0.0   EEPROM                                                            09/10/2021 16:23:09 PAGE 6   
+C51 COMPILER V9.59.0.0   EEPROM                                                            09/13/2021 10:22:09 PAGE 6   
 
  302   1        unsigned char  cod_3,cod_2,cod_1,cod_0;
  303   1        unsigned long int Noticket,Bnoticket=0;
@@ -382,7 +382,7 @@ line level    source
  361   1        Noticket=((Noticket| cod1)<<8);
  362   1        Noticket=Noticket| cod0;
  363   1        return Noticket;
-C51 COMPILER V9.59.0.0   EEPROM                                                            09/10/2021 16:23:09 PAGE 7   
+C51 COMPILER V9.59.0.0   EEPROM                                                            09/13/2021 10:22:09 PAGE 7   
 
  364   1      }
  365          /*----------------------------------------------------------------------------------
@@ -446,7 +446,7 @@ line level    source
  423   3            /*mes high*/
  424   3            temp=hora[2]- 0x30;
  425   3            if (temp == 0)
-C51 COMPILER V9.59.0.0   EEPROM                                                            09/10/2021 16:23:09 PAGE 8   
+C51 COMPILER V9.59.0.0   EEPROM                                                            09/13/2021 10:22:09 PAGE 8   
 
  426   3            {
  427   4              /*mes low*/

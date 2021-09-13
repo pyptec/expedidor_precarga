@@ -516,7 +516,7 @@ void Cmd_LPR_Salida_wiegand(unsigned char *buffer)
 	unsigned char j=3;
 	Buffer_Lpr[0]=STX;																			/*inicio de cmd STx*/
 	Buffer_Lpr[1]=Dir_board();															/*direccion de la tarjeta*/
-	Buffer_Lpr[2]='S';																			/*cmd S que salida wiegand*/
+	Buffer_Lpr[2]='E';																			/*cmd entrada de wiegand*/
 	if(Tipo_Vehiculo!=0)																		/*Tipo de vehiculo*/
 		{
 			Buffer_Lpr[j++]='M';																/*moto*/

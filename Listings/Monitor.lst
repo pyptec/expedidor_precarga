@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   MONITOR                                                           09/10/2021 16:23:10 PAGE 1   
+C51 COMPILER V9.59.0.0   MONITOR                                                           09/13/2021 10:22:10 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE MONITOR
@@ -62,7 +62,7 @@ line level    source
   52          unsigned Timer_monitor_char()
   53          {
   54   1      unsigned char time_out;
-C51 COMPILER V9.59.0.0   MONITOR                                                           09/10/2021 16:23:10 PAGE 2   
+C51 COMPILER V9.59.0.0   MONITOR                                                           09/13/2021 10:22:10 PAGE 2   
 
   55   1      unsigned int contador;    
   56   1              contador=0;
@@ -97,145 +97,165 @@ line level    source
   85          
   86          unsigned char recibe_cmd_Monitor(unsigned char *buffer_cmd)
   87          {
-  88   1        unsigned char j, NumDatos,MaxChrRx;
+  88   1        unsigned char j, NumDatos,MaxChrRx,temp;
   89   1        
   90   1        
   91   1          NumDatos=0;
   92   1          MaxChrRx=12;
   93   1          placa[0]=0x0;
-  94   1        //if (USE_LPR==1)
-  95   1        //{
-  96   1      /*timer que espera el dato de monitor*/
-  97   1              if (Timer_monitor_char() == False)
-  98   1              {
-  99   2                NumDatos= 0;
- 100   2              }
- 101   1              else
- 102   1              {
- 103   2              *buffer_cmd=rx_Data();
- 104   2              
- 105   2                /*valido el inicio del cmd*/
- 106   2                if (*buffer_cmd == 0x02 )
- 107   2                {
- 108   3                  NumDatos++;
- 109   3                  buffer_cmd++;
- 110   3                  
- 111   3                  for (j=1; j<MaxChrRx; j++)
- 112   3                  {
- 113   4                    if (Timer_monitor_char() == False)
- 114   4                    {
- 115   5                      break;
- 116   5                    }
-C51 COMPILER V9.59.0.0   MONITOR                                                           09/10/2021 16:23:10 PAGE 3   
+  94   1      
+  95   1      /*timer que espera el dato de monitor*/
+  96   1              if (Timer_monitor_char() == False)
+  97   1              {
+  98   2                NumDatos= 0;
+  99   2              }
+ 100   1              else
+ 101   1              {
+ 102   2              *buffer_cmd=rx_Data();
+ 103   2              
+ 104   2                /*valido el inicio del cmd*/
+ 105   2                if (*buffer_cmd == 0x02 )
+ 106   2                {
+ 107   3                  NumDatos++;
+ 108   3                  buffer_cmd++;
+ 109   3                  
+ 110   3                  for (j=1; j<MaxChrRx; j++)
+ 111   3                  {
+ 112   4                    if (Timer_monitor_char() == False)
+ 113   4                    {
+ 114   5                      break;
+ 115   5                    }
+ 116   4                    else 
+C51 COMPILER V9.59.0.0   MONITOR                                                           09/13/2021 10:22:10 PAGE 3   
 
- 117   4                    else 
- 118   4                    {
- 119   5                      *buffer_cmd=rx_Data();
- 120   5                      if (*buffer_cmd==ETX)
- 121   5                      {
+ 117   4                    {
+ 118   5                      temp=rx_Data();
+ 119   5                      if (temp==ETX)
+ 120   5                      {
+ 121   6                        *buffer_cmd=temp;
  122   6                        j=MaxChrRx;
  123   6                        NumDatos++;
  124   6                        buffer_cmd++;
  125   6                        buffer_cmd=0;
  126   6                        
  127   6                      }
- 128   5                      else
+ 128   5                      else if (temp == "A")
  129   5                      {
- 130   6                        NumDatos++;
- 131   6                        buffer_cmd++;
- 132   6                      }
- 133   5                      
- 134   5                    }
- 135   4                  }
- 136   3                }
- 137   2                else if (*buffer_cmd == 0x06 )
- 138   2                {
- 139   3                  /*llego el ask*/
- 140   3                  *buffer_cmd=0;
- 141   3                }
- 142   2                else
- 143   2                {
- 144   3                  /*no es 0x02 inicio de trama */
- 145   3                  NumDatos= 0;
- 146   3                  
- 147   3                }
- 148   2              
- 149   2              }
- 150   1              return NumDatos;
- 151   1      }
- 152          
- 153          /*------------------------------------------------------------------------------
- 154          Rutina q valida los cmd de Monitor
- 155          ------------------------------------------------------------------------------*/
- 156          
- 157          void Valida_Trama_Monitor(unsigned char *buffer, unsigned char length_trama)
- 158          {   
- 159   1        unsigned char j=0;
- 160   1        unsigned char p=2;
- 161   1        unsigned char cont=0;
- 162   1        length_trama=1;
- 163   1          
- 164   1            /*habilita relevo abre barrera*/
- 165   1          if  ((*(buffer+1)=='P'))                                                                            /* APERTURA DE BARRETA*/ 
- 166   1              {
- 167   2              
- 168   2                lock=1;   
- 169   2                
- 170   2                Delay_10ms(70);         /*habilita el relevo ON*/
- 171   2                tx_aux(06);             //ack   
- 172   2              
- 173   2              }
- 174   1            /*se recive la placa O EL CANCEL Y NO_PLATE*/ 
- 175   1          else if ((*(buffer+1)=='<')|| (*(buffer+1)=='['))
- 176   1          {
- 177   2            /*placa 0 el cancel borra la fecha del mensual */
- 178   2            do
-C51 COMPILER V9.59.0.0   MONITOR                                                           09/10/2021 16:23:10 PAGE 4   
+ 130   6                        if (Timer_monitor_char() == False)
+ 131   6                        {
+ 132   7                          break;
+ 133   7                        }
+ 134   6                        else 
+ 135   6                        {
+ 136   7                          temp=rx_Data();
+ 137   7                          if (temp==ETX)
+ 138   7                          {
+ 139   8                              j=MaxChrRx;
+ 140   8                            NumDatos=11;
+ 141   8                            *(buffer_cmd+NumDatos)=0;
+ 142   8                          }
+ 143   7                        }
+ 144   6                      }
+ 145   5                      else
+ 146   5                      {
+ 147   6                        *buffer_cmd=temp;
+ 148   6                        NumDatos++;
+ 149   6                        buffer_cmd++;
+ 150   6                      }
+ 151   5                      
+ 152   5                    }
+ 153   4                  }
+ 154   3                }
+ 155   2                else if (*buffer_cmd == 0x06 )
+ 156   2                {
+ 157   3                  /*llego el ask*/
+ 158   3                  *buffer_cmd=0;
+ 159   3                }
+ 160   2                else
+ 161   2                {
+ 162   3                  /*no es 0x02 inicio de trama */
+ 163   3                  NumDatos= 0;
+ 164   3                  
+ 165   3                }
+ 166   2              
+ 167   2              }
+ 168   1              return NumDatos;
+ 169   1      }
+ 170          
+ 171          /*------------------------------------------------------------------------------
+ 172          Rutina q valida los cmd de Monitor
+ 173          ------------------------------------------------------------------------------*/
+ 174          
+ 175          void Valida_Trama_Monitor(unsigned char *buffer, unsigned char length_trama)
+ 176          {   
+ 177   1        unsigned char j=0;
+ 178   1        unsigned char p=2;
+C51 COMPILER V9.59.0.0   MONITOR                                                           09/13/2021 10:22:10 PAGE 4   
 
- 179   2            {
- 180   3              placa[j]=*(buffer+p);
- 181   3              p++;
- 182   3              j++;
- 183   3            }while ((*(buffer+p) != ETX) && (*(buffer+p) != 0) );
- 184   2            *(buffer+p)=0;
- 185   2              placa[j-1]=0;
- 186   2              placa_ready=1;
- 187   2            ValTimeOutCom=10;
- 188   2            led_err_imp = 0;
- 189   2            
- 190   2          }
- 191   1          
- 192   1        
- 193   1      }
- 194          void clear_placa()
- 195          {
- 196   1        unsigned char i;
- 197   1        for(i=0;i<9;i++)
- 198   1        {
- 199   2         placa[i]=0x0;
- 200   2        }
- 201   1         placa_ready=0;
- 202   1        led_err_imp = 1;
- 203   1      }
- 204          void Rx_Monitor()
- 205          {
- 206   1        unsigned char Length_trama;
- 207   1        unsigned char buffer1[13];
- 208   1          buffer1[0]=0;
- 209   1          Length_trama=recibe_cmd_Monitor(buffer1);
- 210   1          Debug_Buffer_rs232_lcd(buffer1,Length_trama);
- 211   1          Debug_monitor(buffer1,Length_trama);
- 212   1          Valida_Trama_Monitor(buffer1,Length_trama);
- 213   1      }
+ 179   1        unsigned char cont=0;
+ 180   1        length_trama=1;
+ 181   1          
+ 182   1            /*habilita relevo abre barrera*/
+ 183   1          if  ((*(buffer+1)=='P'))                                                                            /* APERTURA DE BARRETA*/ 
+ 184   1              {
+ 185   2              
+ 186   2                lock=1;   
+ 187   2                
+ 188   2                Delay_10ms(70);         /*habilita el relevo ON*/
+ 189   2                tx_aux(06);             //ack   
+ 190   2              
+ 191   2              }
+ 192   1            /*se recive la placa O EL CANCEL Y NO_PLATE*/ 
+ 193   1          else if ((*(buffer+1)=='<')|| (*(buffer+1)=='['))
+ 194   1          {
+ 195   2            /*placa 0 el cancel borra la fecha del mensual */
+ 196   2            do
+ 197   2            {
+ 198   3              placa[j]=*(buffer+p);
+ 199   3              p++;
+ 200   3              j++;
+ 201   3            }while ((*(buffer+p) != ETX) && (*(buffer+p) != 0) );
+ 202   2            *(buffer+p)=0;
+ 203   2              placa[j-1]=0;
+ 204   2              placa_ready=1;
+ 205   2            ValTimeOutCom=10;
+ 206   2            led_err_imp = 0;
+ 207   2            
+ 208   2          }
+ 209   1          
+ 210   1        
+ 211   1      }
+ 212          void clear_placa()
+ 213          {
+ 214   1        unsigned char i;
+ 215   1        for(i=0;i<9;i++)
+ 216   1        {
+ 217   2         placa[i]=0x0;
+ 218   2        }
+ 219   1         placa_ready=0;
+ 220   1        led_err_imp = 1;
+ 221   1      }
+ 222          void Rx_Monitor()
+ 223          {
+ 224   1        unsigned char Length_trama;
+ 225   1        unsigned char buffer1[13];
+ 226   1          buffer1[0]=0;
+ 227   1          Length_trama=recibe_cmd_Monitor(buffer1);
+ 228   1          Debug_Buffer_rs232_lcd(buffer1,Length_trama);
+ 229   1          Debug_monitor(buffer1,Length_trama);
+ 230   1          Valida_Trama_Monitor(buffer1,Length_trama);
+ 231   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    598    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----      29
+   CODE SIZE        =    684    ----
+   CONSTANT SIZE    =      2    ----
+   XDATA SIZE       =   ----      30
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =      9    ----
+C51 COMPILER V9.59.0.0   MONITOR                                                           09/13/2021 10:22:10 PAGE 5   
+
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 

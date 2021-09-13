@@ -85,14 +85,13 @@ la trama de placa inicia 0x02<xxxxxx>0x03
 
 unsigned char recibe_cmd_Monitor(unsigned char *buffer_cmd)
 {
-	unsigned char j, NumDatos,MaxChrRx;
+	unsigned char j, NumDatos,MaxChrRx,temp;
 	
 	
 		NumDatos=0;
 		MaxChrRx=12;
 		placa[0]=0x0;
-	//if (USE_LPR==1)
-	//{
+
 /*timer que espera el dato de monitor*/
 				if (Timer_monitor_char() == False)
 				{
@@ -116,17 +115,36 @@ unsigned char recibe_cmd_Monitor(unsigned char *buffer_cmd)
 							}
 							else 
 							{
-								*buffer_cmd=rx_Data();
-								if (*buffer_cmd==ETX)
+								temp=rx_Data();
+								if (temp==ETX)
 								{
+									*buffer_cmd=temp;
 									j=MaxChrRx;
 									NumDatos++;
 									buffer_cmd++;
 									buffer_cmd=0;
 									
 								}
+								else if (temp == "A")
+								{
+									if (Timer_monitor_char() == False)
+									{
+										break;
+									}
+									else 
+									{
+										temp=rx_Data();
+										if (temp==ETX)
+										{
+												j=MaxChrRx;
+											NumDatos=11;
+											*(buffer_cmd+NumDatos)=0;
+										}
+									}
+								}
 								else
 								{
+									*buffer_cmd=temp;
 									NumDatos++;
 									buffer_cmd++;
 								}

@@ -216,7 +216,7 @@ void Valida_Trama_Pto(unsigned char *buffer, unsigned char length_trama)
 				Atascado_GP0_PIN_3 = 0;	
 			}	
 			
-			if ((Debug_Tibbo==0)&& (Timer_tivo>=600)) //&&(USE_LPR==1)
+			if ((Debug_Tibbo==0)&& (Timer_tivo>=1200)) //&&(USE_LPR==1)
 			{
 				Timer_tivo=0;
 				Debug_Tibbo=1;

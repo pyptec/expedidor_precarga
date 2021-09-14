@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 1   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE LINTECH
@@ -62,7 +62,7 @@ line level    source
   52          extern void EscribirCadenaSoft_buffer(unsigned char *buffer,unsigned char tamano_cadena);
   53          extern void Debug_chr_Tibbo(unsigned char Dat);
   54          extern unsigned char Dir_board();
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 2   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 2   
 
   55          
   56          /*atributos */
@@ -126,7 +126,7 @@ line level    source
  114   1      
  115   1        if (Detalle == SENSOR_NORMAL)
  116   1          {
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 3   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 3   
 
  117   2            Debug_txt_Tibbo((unsigned char *) "Check_Status SENSOR_NORMAL\r\n");
  118   2          }
@@ -190,7 +190,7 @@ line level    source
  176   1        g_scArrTxComSoft[4]='C';
  177   1        g_scArrTxComSoft[5]='3';
  178   1      
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 4   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 4   
 
  179   1        g_scArrTxComSoft[7]=ETX;
  180   1        for (j=0; j<8; j++)
@@ -254,7 +254,7 @@ line level    source
  237   2          g_scArrTxComSoft[5]='2';
  238   2          g_scArrTxComSoft[6]=Posicion;
  239   2          g_scArrTxComSoft[7]=ETX;
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 5   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 5   
 
  240   2          for (j=0; j<8; j++)
  241   2          {
@@ -318,7 +318,7 @@ line level    source
  299   1        g_scArrTxComSoft[4]='C';
  300   1        g_scArrTxComSoft[5]=0x60;
  301   1        g_scArrTxComSoft[6]='3';
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 6   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 6   
 
  302   1        g_scArrTxComSoft[7]=0x00;
  303   1        g_scArrTxComSoft[8]=0x20;
@@ -382,7 +382,7 @@ line level    source
  361   1        g_scArrTxComSoft[18]=ETX;
  362   1        
  363   1        for (j=0; j<19; j++)
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 7   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 7   
 
  364   1          {
  365   2            bcc=g_scArrTxComSoft[j]^bcc;
@@ -446,7 +446,7 @@ line level    source
  422   1        Debug_txt_Tibbo((unsigned char *) "Carga y Verifica de EEprom\r\n");
  423   1      
  424   1      
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 8   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 8   
 
  425   1        g_scArrTxComSoft[0]=0xF2;
  426   1        g_scArrTxComSoft[1]=0X00;
@@ -510,7 +510,7 @@ line level    source
  484   1        g_scArrTxComSoft[11]=0x01;
  485   1        g_scArrTxComSoft[12]=ETX;
  486   1      
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 9   
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 9   
 
  487   1        for (j=0; j<13; j++)
  488   1        {
@@ -574,7 +574,7 @@ line level    source
  546   1        g_scArrTxComSoft[29]=bcc;
  547   1      
  548   1        
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 10  
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 10  
 
  549   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
  550   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
@@ -638,7 +638,7 @@ line level    source
  608   2          }
  609   1          g_scArrTxComSoft[8]=bcc;
  610   1          buffer_ready=0;                                   /* buffer del pto serie (0) inicia a esperar la trama*/
-C51 COMPILER V9.59.0.0   LINTECH                                                           09/13/2021 10:22:10 PAGE 11  
+C51 COMPILER V9.59.0.0   LINTECH                                                           09/14/2021 15:59:55 PAGE 11  
 
  611   1          g_cEstadoComSoft=ESPERA_RX;                       /* Espera el ASK en el pt o serie para empesar a almacenas*/
  612   1          DebugBufferMF(g_scArrTxComSoft,9,0);                /*muestra la trama enviada al pto serie a debug por tibbo*/

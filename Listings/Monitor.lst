@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   MONITOR                                                           09/13/2021 10:22:10 PAGE 1   
+C51 COMPILER V9.59.0.0   MONITOR                                                           09/14/2021 15:59:56 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE MONITOR
@@ -62,7 +62,7 @@ line level    source
   52          unsigned Timer_monitor_char()
   53          {
   54   1      unsigned char time_out;
-C51 COMPILER V9.59.0.0   MONITOR                                                           09/13/2021 10:22:10 PAGE 2   
+C51 COMPILER V9.59.0.0   MONITOR                                                           09/14/2021 15:59:56 PAGE 2   
 
   55   1      unsigned int contador;    
   56   1              contador=0;
@@ -126,7 +126,7 @@ line level    source
  114   5                      break;
  115   5                    }
  116   4                    else 
-C51 COMPILER V9.59.0.0   MONITOR                                                           09/13/2021 10:22:10 PAGE 3   
+C51 COMPILER V9.59.0.0   MONITOR                                                           09/14/2021 15:59:56 PAGE 3   
 
  117   4                    {
  118   5                      temp=rx_Data();
@@ -190,7 +190,7 @@ line level    source
  176          {   
  177   1        unsigned char j=0;
  178   1        unsigned char p=2;
-C51 COMPILER V9.59.0.0   MONITOR                                                           09/13/2021 10:22:10 PAGE 4   
+C51 COMPILER V9.59.0.0   MONITOR                                                           09/14/2021 15:59:56 PAGE 4   
 
  179   1        unsigned char cont=0;
  180   1        length_trama=1;
@@ -254,7 +254,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    PDATA SIZE       =   ----    ----
    DATA SIZE        =   ----    ----
    IDATA SIZE       =      9    ----
-C51 COMPILER V9.59.0.0   MONITOR                                                           09/13/2021 10:22:10 PAGE 5   
+C51 COMPILER V9.59.0.0   MONITOR                                                           09/14/2021 15:59:56 PAGE 5   
 
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
